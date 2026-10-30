@@ -1,0 +1,16 @@
+{
+  "status": "no_data",
+  "meta": {
+    "report": "AdventureWorks Sales (Power BI export, monthly)",
+    "currency": "USD",
+    "date_basis": "Order Date (selector 'By Order Date' at export time; verify if re-exporting)",
+    "scope": {
+      "channel": null,
+      "group": null,
+      "category": null,
+      "start": "2023-01",
+      "end": "2023-12"
+    }
+  },
+  "reason": "No rows for the requested period/filters (data cover 2017-07 to 2020-06)."
+}

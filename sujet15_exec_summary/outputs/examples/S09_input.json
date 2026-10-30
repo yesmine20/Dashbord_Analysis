@@ -1,0 +1,297 @@
+{
+  "status": "ok",
+  "meta": {
+    "report": "AdventureWorks Sales (Power BI export, monthly)",
+    "currency": "USD",
+    "date_basis": "Order Date (selector 'By Order Date' at export time; verify if re-exporting)",
+    "scope": {
+      "channel": null,
+      "group": null,
+      "category": "Accessories",
+      "start": null,
+      "end": null
+    },
+    "scope_text": "all channels, all regions, Accessories, 2017-07 to 2020-06",
+    "period_start": "2017-07",
+    "period_end": "2020-06",
+    "months_covered": 33,
+    "thresholds": {
+      "sales_variation_pct": 15.0,
+      "sales_variation_abs_usd": 1000000,
+      "margin_drop_pts": 5.0,
+      "channel_gap_pts": 20.0,
+      "segment_deviation_pts": 10.0
+    },
+    "rule_counts": {
+      "R1_margin_alert": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R2_sales_variation": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R3_like_for_like_yoy": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R4_channel_gap": {
+        "flagged": 1,
+        "reported": 1
+      },
+      "R5_segment_outlier": {
+        "flagged": 0,
+        "reported": 0
+      }
+    }
+  },
+  "kpis": {
+    "sales": {
+      "value": 1272060.0,
+      "display": "$1.27M"
+    },
+    "cost": {
+      "value": 637587.0,
+      "display": "$638K"
+    },
+    "profit": {
+      "value": 634472.0,
+      "display": "$634K"
+    },
+    "profit_margin_pct": {
+      "value": 49.9,
+      "display": "49.9%"
+    }
+  },
+  "breakdown": {
+    "Channel": [
+      {
+        "segment": "Internet",
+        "sales": {
+          "value": 700760.0,
+          "display": "$701K"
+        },
+        "profit": {
+          "value": 438677.0,
+          "display": "$439K"
+        },
+        "margin_pct": {
+          "value": 62.6,
+          "display": "62.6%"
+        },
+        "share_of_sales_pct": {
+          "value": 55.1,
+          "display": "55.1%"
+        }
+      },
+      {
+        "segment": "Reseller",
+        "sales": {
+          "value": 571300.0,
+          "display": "$571K"
+        },
+        "profit": {
+          "value": 195795.0,
+          "display": "$196K"
+        },
+        "margin_pct": {
+          "value": 34.3,
+          "display": "34.3%"
+        },
+        "share_of_sales_pct": {
+          "value": 44.9,
+          "display": "44.9%"
+        }
+      }
+    ],
+    "Group": [
+      {
+        "segment": "North America",
+        "sales": {
+          "value": 781444.0,
+          "display": "$781K"
+        },
+        "profit": {
+          "value": 369457.0,
+          "display": "$369K"
+        },
+        "margin_pct": {
+          "value": 47.3,
+          "display": "47.3%"
+        },
+        "share_of_sales_pct": {
+          "value": 61.4,
+          "display": "61.4%"
+        }
+      },
+      {
+        "segment": "Europe",
+        "sales": {
+          "value": 327977.0,
+          "display": "$328K"
+        },
+        "profit": {
+          "value": 169219.0,
+          "display": "$169K"
+        },
+        "margin_pct": {
+          "value": 51.6,
+          "display": "51.6%"
+        },
+        "share_of_sales_pct": {
+          "value": 25.8,
+          "display": "25.8%"
+        }
+      },
+      {
+        "segment": "Pacific",
+        "sales": {
+          "value": 162639.0,
+          "display": "$163K"
+        },
+        "profit": {
+          "value": 95796.0,
+          "display": "$96K"
+        },
+        "margin_pct": {
+          "value": 58.9,
+          "display": "58.9%"
+        },
+        "share_of_sales_pct": {
+          "value": 12.8,
+          "display": "12.8%"
+        }
+      }
+    ]
+  },
+  "yearly": [
+    {
+      "year": 2017,
+      "months_covered": 4,
+      "complete_year": false,
+      "sales": {
+        "value": 20236.0,
+        "display": "$20K"
+      },
+      "profit": {
+        "value": 8171.0,
+        "display": "$8K"
+      },
+      "margin_pct": {
+        "value": 40.4,
+        "display": "40.4%"
+      }
+    },
+    {
+      "year": 2018,
+      "months_covered": 11,
+      "complete_year": false,
+      "sales": {
+        "value": 92734.0,
+        "display": "$93K"
+      },
+      "profit": {
+        "value": 28352.0,
+        "display": "$28K"
+      },
+      "margin_pct": {
+        "value": 30.6,
+        "display": "30.6%"
+      }
+    },
+    {
+      "year": 2019,
+      "months_covered": 12,
+      "complete_year": true,
+      "sales": {
+        "value": 646702.0,
+        "display": "$647K"
+      },
+      "profit": {
+        "value": 319019.0,
+        "display": "$319K"
+      },
+      "margin_pct": {
+        "value": 49.3,
+        "display": "49.3%"
+      }
+    },
+    {
+      "year": 2020,
+      "months_covered": 6,
+      "complete_year": false,
+      "sales": {
+        "value": 512388.0,
+        "display": "$512K"
+      },
+      "profit": {
+        "value": 278930.0,
+        "display": "$279K"
+      },
+      "margin_pct": {
+        "value": 54.4,
+        "display": "54.4%"
+      }
+    }
+  ],
+  "anomalies": [
+    {
+      "id": "A01",
+      "rule": "R4_channel_gap",
+      "direction": "structural",
+      "period": "whole scope",
+      "what": "Large profit-margin gap between sales channels.",
+      "metrics": {
+        "higher_margin_channel": {
+          "channel": "Internet",
+          "sales": {
+            "value": 700760.0,
+            "display": "$701K"
+          },
+          "profit": {
+            "value": 438677.0,
+            "display": "$439K"
+          },
+          "margin_pct": {
+            "value": 62.6,
+            "display": "62.6%"
+          },
+          "share_of_sales_pct": {
+            "value": 55.1,
+            "display": "55.1%"
+          }
+        },
+        "lower_margin_channel": {
+          "channel": "Reseller",
+          "sales": {
+            "value": 571300.0,
+            "display": "$571K"
+          },
+          "profit": {
+            "value": 195795.0,
+            "display": "$196K"
+          },
+          "margin_pct": {
+            "value": 34.3,
+            "display": "34.3%"
+          },
+          "share_of_sales_pct": {
+            "value": 44.9,
+            "display": "44.9%"
+          }
+        },
+        "margin_gap_pts": {
+          "value": 28.3,
+          "display": "28.3 pts"
+        }
+      },
+      "contributors": {}
+    }
+  ],
+  "limitations": [
+    "The data show where and when changes happened, not why. Contributing segments are not confirmed causes.",
+    "Order counts are not additive across rows and are excluded from this analysis.",
+    "The dataset contains no sales targets, so no target-gap analysis is possible.",
+    "Calendar years with less than 12 months of data: 2017 (4 months), 2018 (11 months), 2020 (6 months). Year-over-year comparisons use like-for-like windows only."
+  ]
+}

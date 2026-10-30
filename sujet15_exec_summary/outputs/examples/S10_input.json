@@ -1,0 +1,963 @@
+{
+  "status": "ok",
+  "meta": {
+    "report": "AdventureWorks Sales (Power BI export, monthly)",
+    "currency": "USD",
+    "date_basis": "Order Date (selector 'By Order Date' at export time; verify if re-exporting)",
+    "scope": {
+      "channel": null,
+      "group": null,
+      "category": null,
+      "start": "2019-01",
+      "end": "2019-12"
+    },
+    "scope_text": "all channels, all regions, all categories, 2019-01 to 2019-12",
+    "period_start": "2019-01",
+    "period_end": "2019-12",
+    "months_covered": 12,
+    "thresholds": {
+      "sales_variation_pct": 15.0,
+      "sales_variation_abs_usd": 1000000,
+      "margin_drop_pts": 5.0,
+      "channel_gap_pts": 20.0,
+      "segment_deviation_pts": 10.0
+    },
+    "rule_counts": {
+      "R1_margin_alert": {
+        "flagged": 2,
+        "reported": 2
+      },
+      "R2_sales_variation": {
+        "flagged": 4,
+        "reported": 4
+      },
+      "R3_like_for_like_yoy": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R4_channel_gap": {
+        "flagged": 1,
+        "reported": 1
+      },
+      "R5_segment_outlier": {
+        "flagged": 1,
+        "reported": 1
+      }
+    }
+  },
+  "kpis": {
+    "sales": {
+      "value": 42895110.0,
+      "display": "$42.90M"
+    },
+    "cost": {
+      "value": 38619696.0,
+      "display": "$38.62M"
+    },
+    "profit": {
+      "value": 4275411.0,
+      "display": "$4.28M"
+    },
+    "profit_margin_pct": {
+      "value": 10.0,
+      "display": "10.0%"
+    }
+  },
+  "breakdown": {
+    "Channel": [
+      {
+        "segment": "Reseller",
+        "sales": {
+          "value": 32202671.0,
+          "display": "$32.20M"
+        },
+        "profit": {
+          "value": -168553.0,
+          "display": "-$169K"
+        },
+        "margin_pct": {
+          "value": -0.5,
+          "display": "-0.5%"
+        },
+        "share_of_sales_pct": {
+          "value": 75.1,
+          "display": "75.1%"
+        }
+      },
+      {
+        "segment": "Internet",
+        "sales": {
+          "value": 10692439.0,
+          "display": "$10.69M"
+        },
+        "profit": {
+          "value": 4443964.0,
+          "display": "$4.44M"
+        },
+        "margin_pct": {
+          "value": 41.6,
+          "display": "41.6%"
+        },
+        "share_of_sales_pct": {
+          "value": 24.9,
+          "display": "24.9%"
+        }
+      }
+    ],
+    "Category": [
+      {
+        "segment": "Bikes",
+        "sales": {
+          "value": 35726580.0,
+          "display": "$35.73M"
+        },
+        "profit": {
+          "value": 3375337.0,
+          "display": "$3.38M"
+        },
+        "margin_pct": {
+          "value": 9.4,
+          "display": "9.4%"
+        },
+        "share_of_sales_pct": {
+          "value": 83.3,
+          "display": "83.3%"
+        }
+      },
+      {
+        "segment": "Components",
+        "sales": {
+          "value": 5482499.0,
+          "display": "$5.48M"
+        },
+        "profit": {
+          "value": 414934.0,
+          "display": "$415K"
+        },
+        "margin_pct": {
+          "value": 7.6,
+          "display": "7.6%"
+        },
+        "share_of_sales_pct": {
+          "value": 12.8,
+          "display": "12.8%"
+        }
+      },
+      {
+        "segment": "Clothing",
+        "sales": {
+          "value": 1039329.0,
+          "display": "$1.04M"
+        },
+        "profit": {
+          "value": 166121.0,
+          "display": "$166K"
+        },
+        "margin_pct": {
+          "value": 16.0,
+          "display": "16.0%"
+        },
+        "share_of_sales_pct": {
+          "value": 2.4,
+          "display": "2.4%"
+        }
+      },
+      {
+        "segment": "Accessories",
+        "sales": {
+          "value": 646702.0,
+          "display": "$647K"
+        },
+        "profit": {
+          "value": 319019.0,
+          "display": "$319K"
+        },
+        "margin_pct": {
+          "value": 49.3,
+          "display": "49.3%"
+        },
+        "share_of_sales_pct": {
+          "value": 1.5,
+          "display": "1.5%"
+        }
+      }
+    ],
+    "Group": [
+      {
+        "segment": "North America",
+        "sales": {
+          "value": 29513951.0,
+          "display": "$29.51M"
+        },
+        "profit": {
+          "value": 1731034.0,
+          "display": "$1.73M"
+        },
+        "margin_pct": {
+          "value": 5.9,
+          "display": "5.9%"
+        },
+        "share_of_sales_pct": {
+          "value": 68.8,
+          "display": "68.8%"
+        }
+      },
+      {
+        "segment": "Europe",
+        "sales": {
+          "value": 9294577.0,
+          "display": "$9.29M"
+        },
+        "profit": {
+          "value": 1316606.0,
+          "display": "$1.32M"
+        },
+        "margin_pct": {
+          "value": 14.2,
+          "display": "14.2%"
+        },
+        "share_of_sales_pct": {
+          "value": 21.7,
+          "display": "21.7%"
+        }
+      },
+      {
+        "segment": "Pacific",
+        "sales": {
+          "value": 4086582.0,
+          "display": "$4.09M"
+        },
+        "profit": {
+          "value": 1227771.0,
+          "display": "$1.23M"
+        },
+        "margin_pct": {
+          "value": 30.0,
+          "display": "30.0%"
+        },
+        "share_of_sales_pct": {
+          "value": 9.5,
+          "display": "9.5%"
+        }
+      }
+    ]
+  },
+  "yearly": [
+    {
+      "year": 2019,
+      "months_covered": 12,
+      "complete_year": true,
+      "sales": {
+        "value": 42895110.0,
+        "display": "$42.90M"
+      },
+      "profit": {
+        "value": 4275411.0,
+        "display": "$4.28M"
+      },
+      "margin_pct": {
+        "value": 10.0,
+        "display": "10.0%"
+      }
+    }
+  ],
+  "anomalies": [
+    {
+      "id": "A01",
+      "rule": "R1_margin_alert",
+      "direction": "negative",
+      "period": "2019-08",
+      "what": "Monthly profit margin fell well below its trailing baseline.",
+      "metrics": {
+        "sales": {
+          "value": 5247166.0,
+          "display": "$5.25M"
+        },
+        "profit": {
+          "value": 179539.0,
+          "display": "$180K"
+        },
+        "margin_pct": {
+          "value": 3.4,
+          "display": "3.4%"
+        },
+        "negative_profit": false,
+        "baseline_margin_pct": {
+          "value": 10.0,
+          "display": "10.0%"
+        },
+        "margin_drop_pts": {
+          "value": 6.6,
+          "display": "6.6 pts"
+        },
+        "profit_vs_baseline": {
+          "value": -346250.25,
+          "display": "-$346K"
+        }
+      },
+      "contributors": {
+        "weakest_segments_in_month": {
+          "Channel": [
+            {
+              "segment": "Reseller",
+              "sales": {
+                "value": 4212971.0,
+                "display": "$4.21M"
+              },
+              "profit": {
+                "value": -250819.0,
+                "display": "-$251K"
+              },
+              "margin_pct": {
+                "value": -6.0,
+                "display": "-6.0%"
+              }
+            },
+            {
+              "segment": "Internet",
+              "sales": {
+                "value": 1034195.0,
+                "display": "$1.03M"
+              },
+              "profit": {
+                "value": 430358.0,
+                "display": "$430K"
+              },
+              "margin_pct": {
+                "value": 41.6,
+                "display": "41.6%"
+              }
+            }
+          ],
+          "Category": [
+            {
+              "segment": "Clothing",
+              "sales": {
+                "value": 155454.0,
+                "display": "$155K"
+              },
+              "profit": {
+                "value": 16627.0,
+                "display": "$17K"
+              },
+              "margin_pct": {
+                "value": 10.7,
+                "display": "10.7%"
+              }
+            },
+            {
+              "segment": "Components",
+              "sales": {
+                "value": 928037.0,
+                "display": "$928K"
+              },
+              "profit": {
+                "value": 47109.0,
+                "display": "$47K"
+              },
+              "margin_pct": {
+                "value": 5.1,
+                "display": "5.1%"
+              }
+            }
+          ],
+          "Group": [
+            {
+              "segment": "Europe",
+              "sales": {
+                "value": 1528314.0,
+                "display": "$1.53M"
+              },
+              "profit": {
+                "value": 11171.0,
+                "display": "$11K"
+              },
+              "margin_pct": {
+                "value": 0.7,
+                "display": "0.7%"
+              }
+            },
+            {
+              "segment": "North America",
+              "sales": {
+                "value": 3250843.0,
+                "display": "$3.25M"
+              },
+              "profit": {
+                "value": 76758.0,
+                "display": "$77K"
+              },
+              "margin_pct": {
+                "value": 2.4,
+                "display": "2.4%"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "A02",
+      "rule": "R1_margin_alert",
+      "direction": "negative",
+      "period": "2019-07",
+      "what": "Monthly profit margin fell well below its trailing baseline.",
+      "metrics": {
+        "sales": {
+          "value": 3513066.0,
+          "display": "$3.51M"
+        },
+        "profit": {
+          "value": 171545.0,
+          "display": "$172K"
+        },
+        "margin_pct": {
+          "value": 4.9,
+          "display": "4.9%"
+        },
+        "negative_profit": false,
+        "baseline_margin_pct": {
+          "value": 12.9,
+          "display": "12.9%"
+        },
+        "margin_drop_pts": {
+          "value": 8.0,
+          "display": "8.0 pts"
+        },
+        "profit_vs_baseline": {
+          "value": -281744.4,
+          "display": "-$282K"
+        }
+      },
+      "contributors": {
+        "weakest_segments_in_month": {
+          "Channel": [
+            {
+              "segment": "Reseller",
+              "sales": {
+                "value": 2665651.0,
+                "display": "$2.67M"
+              },
+              "profit": {
+                "value": -181858.0,
+                "display": "-$182K"
+              },
+              "margin_pct": {
+                "value": -6.8,
+                "display": "-6.8%"
+              }
+            },
+            {
+              "segment": "Internet",
+              "sales": {
+                "value": 847415.0,
+                "display": "$847K"
+              },
+              "profit": {
+                "value": 353403.0,
+                "display": "$353K"
+              },
+              "margin_pct": {
+                "value": 41.7,
+                "display": "41.7%"
+              }
+            }
+          ],
+          "Category": [
+            {
+              "segment": "Clothing",
+              "sales": {
+                "value": 105281.0,
+                "display": "$105K"
+              },
+              "profit": {
+                "value": 9037.0,
+                "display": "$9K"
+              },
+              "margin_pct": {
+                "value": 8.6,
+                "display": "8.6%"
+              }
+            },
+            {
+              "segment": "Components",
+              "sales": {
+                "value": 628816.0,
+                "display": "$629K"
+              },
+              "profit": {
+                "value": 27205.0,
+                "display": "$27K"
+              },
+              "margin_pct": {
+                "value": 4.3,
+                "display": "4.3%"
+              }
+            }
+          ],
+          "Group": [
+            {
+              "segment": "North America",
+              "sales": {
+                "value": 2582783.0,
+                "display": "$2.58M"
+              },
+              "profit": {
+                "value": 34077.0,
+                "display": "$34K"
+              },
+              "margin_pct": {
+                "value": 1.3,
+                "display": "1.3%"
+              }
+            },
+            {
+              "segment": "Pacific",
+              "sales": {
+                "value": 237939.0,
+                "display": "$238K"
+              },
+              "profit": {
+                "value": 56738.0,
+                "display": "$57K"
+              },
+              "margin_pct": {
+                "value": 23.8,
+                "display": "23.8%"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "A03",
+      "rule": "R2_sales_variation",
+      "direction": "positive",
+      "period": "2019-08",
+      "what": "Month-over-month sales change versus 2019-07.",
+      "metrics": {
+        "sales": {
+          "value": 5247166.0,
+          "display": "$5.25M"
+        },
+        "previous_sales": {
+          "value": 3513066.0,
+          "display": "$3.51M"
+        },
+        "sales_change": {
+          "value": 1734100.0,
+          "display": "$1.73M"
+        },
+        "sales_change_pct": {
+          "value": 49.4,
+          "display": "49.4%"
+        },
+        "profit": {
+          "value": 179539.0,
+          "display": "$180K"
+        },
+        "margin_pct": {
+          "value": 3.4,
+          "display": "3.4%"
+        }
+      },
+      "contributors": {
+        "largest_changes_by_segment": {
+          "Channel": [
+            {
+              "segment": "Reseller",
+              "change": {
+                "value": 1547320.0,
+                "display": "$1.55M"
+              }
+            },
+            {
+              "segment": "Internet",
+              "change": {
+                "value": 186780.0,
+                "display": "$187K"
+              }
+            }
+          ],
+          "Category": [
+            {
+              "segment": "Bikes",
+              "change": {
+                "value": 1359635.0,
+                "display": "$1.36M"
+              }
+            },
+            {
+              "segment": "Components",
+              "change": {
+                "value": 299221.0,
+                "display": "$299K"
+              }
+            }
+          ],
+          "Group": [
+            {
+              "segment": "Europe",
+              "change": {
+                "value": 835970.0,
+                "display": "$836K"
+              }
+            },
+            {
+              "segment": "North America",
+              "change": {
+                "value": 668060.0,
+                "display": "$668K"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "A04",
+      "rule": "R2_sales_variation",
+      "direction": "positive",
+      "period": "2019-11",
+      "what": "Month-over-month sales change versus 2019-10.",
+      "metrics": {
+        "sales": {
+          "value": 5151895.0,
+          "display": "$5.15M"
+        },
+        "previous_sales": {
+          "value": 3542150.0,
+          "display": "$3.54M"
+        },
+        "sales_change": {
+          "value": 1609745.0,
+          "display": "$1.61M"
+        },
+        "sales_change_pct": {
+          "value": 45.4,
+          "display": "45.4%"
+        },
+        "profit": {
+          "value": 708923.0,
+          "display": "$709K"
+        },
+        "margin_pct": {
+          "value": 13.8,
+          "display": "13.8%"
+        }
+      },
+      "contributors": {
+        "largest_changes_by_segment": {
+          "Channel": [
+            {
+              "segment": "Reseller",
+              "change": {
+                "value": 1201044.0,
+                "display": "$1.20M"
+              }
+            },
+            {
+              "segment": "Internet",
+              "change": {
+                "value": 408701.0,
+                "display": "$409K"
+              }
+            }
+          ],
+          "Category": [
+            {
+              "segment": "Bikes",
+              "change": {
+                "value": 1330672.0,
+                "display": "$1.33M"
+              }
+            },
+            {
+              "segment": "Components",
+              "change": {
+                "value": 235472.0,
+                "display": "$235K"
+              }
+            }
+          ],
+          "Group": [
+            {
+              "segment": "Europe",
+              "change": {
+                "value": 830594.0,
+                "display": "$831K"
+              }
+            },
+            {
+              "segment": "North America",
+              "change": {
+                "value": 688214.0,
+                "display": "$688K"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "A05",
+      "rule": "R2_sales_variation",
+      "direction": "negative",
+      "period": "2019-10",
+      "what": "Month-over-month sales change versus 2019-09.",
+      "metrics": {
+        "sales": {
+          "value": 3542150.0,
+          "display": "$3.54M"
+        },
+        "previous_sales": {
+          "value": 5104089.0,
+          "display": "$5.10M"
+        },
+        "sales_change": {
+          "value": -1561939.0,
+          "display": "-$1.56M"
+        },
+        "sales_change_pct": {
+          "value": -30.6,
+          "display": "-30.6%"
+        },
+        "profit": {
+          "value": 518621.0,
+          "display": "$519K"
+        },
+        "margin_pct": {
+          "value": 14.6,
+          "display": "14.6%"
+        }
+      },
+      "contributors": {
+        "largest_changes_by_segment": {
+          "Channel": [
+            {
+              "segment": "Reseller",
+              "change": {
+                "value": -1765459.0,
+                "display": "-$1.77M"
+              }
+            },
+            {
+              "segment": "Internet",
+              "change": {
+                "value": 203520.0,
+                "display": "$204K"
+              }
+            }
+          ],
+          "Category": [
+            {
+              "segment": "Bikes",
+              "change": {
+                "value": -835657.0,
+                "display": "-$836K"
+              }
+            },
+            {
+              "segment": "Components",
+              "change": {
+                "value": -653721.0,
+                "display": "-$654K"
+              }
+            }
+          ],
+          "Group": [
+            {
+              "segment": "North America",
+              "change": {
+                "value": -971798.0,
+                "display": "-$972K"
+              }
+            },
+            {
+              "segment": "Europe",
+              "change": {
+                "value": -391178.0,
+                "display": "-$391K"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "A06",
+      "rule": "R2_sales_variation",
+      "direction": "positive",
+      "period": "2019-05",
+      "what": "Month-over-month sales change versus 2019-04.",
+      "metrics": {
+        "sales": {
+          "value": 3459444.0,
+          "display": "$3.46M"
+        },
+        "previous_sales": {
+          "value": 2405971.0,
+          "display": "$2.41M"
+        },
+        "sales_change": {
+          "value": 1053473.0,
+          "display": "$1.05M"
+        },
+        "sales_change_pct": {
+          "value": 43.8,
+          "display": "43.8%"
+        },
+        "profit": {
+          "value": 359543.0,
+          "display": "$360K"
+        },
+        "margin_pct": {
+          "value": 10.4,
+          "display": "10.4%"
+        }
+      },
+      "contributors": {
+        "largest_changes_by_segment": {
+          "Channel": [
+            {
+              "segment": "Reseller",
+              "change": {
+                "value": 1015476.0,
+                "display": "$1.02M"
+              }
+            },
+            {
+              "segment": "Internet",
+              "change": {
+                "value": 37997.0,
+                "display": "$38K"
+              }
+            }
+          ],
+          "Category": [
+            {
+              "segment": "Bikes",
+              "change": {
+                "value": 874241.0,
+                "display": "$874K"
+              }
+            },
+            {
+              "segment": "Components",
+              "change": {
+                "value": 153061.0,
+                "display": "$153K"
+              }
+            }
+          ],
+          "Group": [
+            {
+              "segment": "North America",
+              "change": {
+                "value": 798383.0,
+                "display": "$798K"
+              }
+            },
+            {
+              "segment": "Europe",
+              "change": {
+                "value": 245718.0,
+                "display": "$246K"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "A07",
+      "rule": "R4_channel_gap",
+      "direction": "structural",
+      "period": "whole scope",
+      "what": "Large profit-margin gap between sales channels.",
+      "metrics": {
+        "higher_margin_channel": {
+          "channel": "Internet",
+          "sales": {
+            "value": 10692439.0,
+            "display": "$10.69M"
+          },
+          "profit": {
+            "value": 4443964.0,
+            "display": "$4.44M"
+          },
+          "margin_pct": {
+            "value": 41.6,
+            "display": "41.6%"
+          },
+          "share_of_sales_pct": {
+            "value": 24.9,
+            "display": "24.9%"
+          }
+        },
+        "lower_margin_channel": {
+          "channel": "Reseller",
+          "sales": {
+            "value": 32202671.0,
+            "display": "$32.20M"
+          },
+          "profit": {
+            "value": -168553.0,
+            "display": "-$169K"
+          },
+          "margin_pct": {
+            "value": -0.5,
+            "display": "-0.5%"
+          },
+          "share_of_sales_pct": {
+            "value": 75.1,
+            "display": "75.1%"
+          }
+        },
+        "margin_gap_pts": {
+          "value": 42.1,
+          "display": "42.1 pts"
+        }
+      },
+      "contributors": {}
+    },
+    {
+      "id": "A08",
+      "rule": "R5_segment_outlier",
+      "direction": "positive",
+      "period": "whole scope",
+      "what": "Group margin far from the scope margin.",
+      "metrics": {
+        "dimension": "Group",
+        "segment": "Pacific",
+        "sales": {
+          "value": 4086582.0,
+          "display": "$4.09M"
+        },
+        "share_of_sales_pct": {
+          "value": 9.5,
+          "display": "9.5%"
+        },
+        "margin_pct": {
+          "value": 30.0,
+          "display": "30.0%"
+        },
+        "scope_margin_pct": {
+          "value": 10.0,
+          "display": "10.0%"
+        },
+        "gap_pts": {
+          "value": 20.1,
+          "display": "20.1 pts"
+        }
+      },
+      "contributors": {}
+    }
+  ],
+  "limitations": [
+    "The data show where and when changes happened, not why. Contributing segments are not confirmed causes.",
+    "Order counts are not additive across rows and are excluded from this analysis.",
+    "The dataset contains no sales targets, so no target-gap analysis is possible."
+  ]
+}

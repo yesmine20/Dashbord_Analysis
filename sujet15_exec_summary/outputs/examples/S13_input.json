@@ -1,0 +1,127 @@
+{
+  "status": "ok",
+  "meta": {
+    "report": "AdventureWorks Sales (Power BI export, monthly)",
+    "currency": "USD",
+    "date_basis": "Order Date (selector 'By Order Date' at export time; verify if re-exporting)",
+    "scope": {
+      "channel": null,
+      "group": "Europe",
+      "category": "Components",
+      "start": null,
+      "end": null
+    },
+    "scope_text": "all channels, Europe, Components, 2018-07 to 2020-06",
+    "period_start": "2018-07",
+    "period_end": "2020-06",
+    "months_covered": 24,
+    "thresholds": {
+      "sales_variation_pct": 15.0,
+      "sales_variation_abs_usd": 1000000,
+      "margin_drop_pts": 5.0,
+      "channel_gap_pts": 20.0,
+      "segment_deviation_pts": 10.0
+    },
+    "rule_counts": {
+      "R1_margin_alert": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R2_sales_variation": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R3_like_for_like_yoy": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R4_channel_gap": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R5_segment_outlier": {
+        "flagged": 0,
+        "reported": 0
+      }
+    }
+  },
+  "kpis": {
+    "sales": {
+      "value": 1916857.0,
+      "display": "$1.92M"
+    },
+    "cost": {
+      "value": 1779096.0,
+      "display": "$1.78M"
+    },
+    "profit": {
+      "value": 137764.0,
+      "display": "$138K"
+    },
+    "profit_margin_pct": {
+      "value": 7.2,
+      "display": "7.2%"
+    }
+  },
+  "breakdown": {},
+  "yearly": [
+    {
+      "year": 2018,
+      "months_covered": 6,
+      "complete_year": false,
+      "sales": {
+        "value": 336974.0,
+        "display": "$337K"
+      },
+      "profit": {
+        "value": 40583.0,
+        "display": "$41K"
+      },
+      "margin_pct": {
+        "value": 12.0,
+        "display": "12.0%"
+      }
+    },
+    {
+      "year": 2019,
+      "months_covered": 12,
+      "complete_year": true,
+      "sales": {
+        "value": 1075251.0,
+        "display": "$1.08M"
+      },
+      "profit": {
+        "value": 67227.0,
+        "display": "$67K"
+      },
+      "margin_pct": {
+        "value": 6.3,
+        "display": "6.3%"
+      }
+    },
+    {
+      "year": 2020,
+      "months_covered": 6,
+      "complete_year": false,
+      "sales": {
+        "value": 504632.0,
+        "display": "$505K"
+      },
+      "profit": {
+        "value": 29954.0,
+        "display": "$30K"
+      },
+      "margin_pct": {
+        "value": 5.9,
+        "display": "5.9%"
+      }
+    }
+  ],
+  "anomalies": [],
+  "limitations": [
+    "The data show where and when changes happened, not why. Contributing segments are not confirmed causes.",
+    "Order counts are not additive across rows and are excluded from this analysis.",
+    "The dataset contains no sales targets, so no target-gap analysis is possible.",
+    "Calendar years with less than 12 months of data: 2018 (6 months), 2020 (6 months). Year-over-year comparisons use like-for-like windows only."
+  ]
+}

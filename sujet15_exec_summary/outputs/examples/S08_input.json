@@ -1,0 +1,275 @@
+{
+  "status": "ok",
+  "meta": {
+    "report": "AdventureWorks Sales (Power BI export, monthly)",
+    "currency": "USD",
+    "date_basis": "Order Date (selector 'By Order Date' at export time; verify if re-exporting)",
+    "scope": {
+      "channel": null,
+      "group": null,
+      "category": "Components",
+      "start": null,
+      "end": null
+    },
+    "scope_text": "all channels, all regions, Components, 2017-07 to 2020-06",
+    "period_start": "2017-07",
+    "period_end": "2020-06",
+    "months_covered": 33,
+    "thresholds": {
+      "sales_variation_pct": 15.0,
+      "sales_variation_abs_usd": 1000000,
+      "margin_drop_pts": 5.0,
+      "channel_gap_pts": 20.0,
+      "segment_deviation_pts": 10.0
+    },
+    "rule_counts": {
+      "R1_margin_alert": {
+        "flagged": 1,
+        "reported": 1
+      },
+      "R2_sales_variation": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R3_like_for_like_yoy": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R4_channel_gap": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R5_segment_outlier": {
+        "flagged": 0,
+        "reported": 0
+      }
+    }
+  },
+  "kpis": {
+    "sales": {
+      "value": 11799082.0,
+      "display": "$11.80M"
+    },
+    "cost": {
+      "value": 10766109.0,
+      "display": "$10.77M"
+    },
+    "profit": {
+      "value": 1032969.0,
+      "display": "$1.03M"
+    },
+    "profit_margin_pct": {
+      "value": 8.8,
+      "display": "8.8%"
+    }
+  },
+  "breakdown": {
+    "Group": [
+      {
+        "segment": "North America",
+        "sales": {
+          "value": 9678572.0,
+          "display": "$9.68M"
+        },
+        "profit": {
+          "value": 881505.0,
+          "display": "$882K"
+        },
+        "margin_pct": {
+          "value": 9.1,
+          "display": "9.1%"
+        },
+        "share_of_sales_pct": {
+          "value": 82.0,
+          "display": "82.0%"
+        }
+      },
+      {
+        "segment": "Europe",
+        "sales": {
+          "value": 1916857.0,
+          "display": "$1.92M"
+        },
+        "profit": {
+          "value": 137764.0,
+          "display": "$138K"
+        },
+        "margin_pct": {
+          "value": 7.2,
+          "display": "7.2%"
+        },
+        "share_of_sales_pct": {
+          "value": 16.2,
+          "display": "16.2%"
+        }
+      },
+      {
+        "segment": "Pacific",
+        "sales": {
+          "value": 203653.0,
+          "display": "$204K"
+        },
+        "profit": {
+          "value": 13700.0,
+          "display": "$14K"
+        },
+        "margin_pct": {
+          "value": 6.7,
+          "display": "6.7%"
+        },
+        "share_of_sales_pct": {
+          "value": 1.7,
+          "display": "1.7%"
+        }
+      }
+    ]
+  },
+  "yearly": [
+    {
+      "year": 2017,
+      "months_covered": 4,
+      "complete_year": false,
+      "sales": {
+        "value": 615475.0,
+        "display": "$615K"
+      },
+      "profit": {
+        "value": 54035.0,
+        "display": "$54K"
+      },
+      "margin_pct": {
+        "value": 8.8,
+        "display": "8.8%"
+      }
+    },
+    {
+      "year": 2018,
+      "months_covered": 11,
+      "complete_year": false,
+      "sales": {
+        "value": 3610094.0,
+        "display": "$3.61M"
+      },
+      "profit": {
+        "value": 425986.0,
+        "display": "$426K"
+      },
+      "margin_pct": {
+        "value": 11.8,
+        "display": "11.8%"
+      }
+    },
+    {
+      "year": 2019,
+      "months_covered": 12,
+      "complete_year": true,
+      "sales": {
+        "value": 5482499.0,
+        "display": "$5.48M"
+      },
+      "profit": {
+        "value": 414934.0,
+        "display": "$415K"
+      },
+      "margin_pct": {
+        "value": 7.6,
+        "display": "7.6%"
+      }
+    },
+    {
+      "year": 2020,
+      "months_covered": 6,
+      "complete_year": false,
+      "sales": {
+        "value": 2091014.0,
+        "display": "$2.09M"
+      },
+      "profit": {
+        "value": 138014.0,
+        "display": "$138K"
+      },
+      "margin_pct": {
+        "value": 6.6,
+        "display": "6.6%"
+      }
+    }
+  ],
+  "anomalies": [
+    {
+      "id": "A01",
+      "rule": "R1_margin_alert",
+      "direction": "negative",
+      "period": "2019-07",
+      "what": "Monthly profit margin fell well below its trailing baseline.",
+      "metrics": {
+        "sales": {
+          "value": 628816.0,
+          "display": "$629K"
+        },
+        "profit": {
+          "value": 27205.0,
+          "display": "$27K"
+        },
+        "margin_pct": {
+          "value": 4.3,
+          "display": "4.3%"
+        },
+        "negative_profit": false,
+        "baseline_margin_pct": {
+          "value": 12.5,
+          "display": "12.5%"
+        },
+        "margin_drop_pts": {
+          "value": 8.1,
+          "display": "8.1 pts"
+        },
+        "profit_vs_baseline": {
+          "value": -51143.91,
+          "display": "-$51K"
+        }
+      },
+      "contributors": {
+        "weakest_segments_in_month": {
+          "Group": [
+            {
+              "segment": "Pacific",
+              "sales": {
+                "value": 9599.0,
+                "display": "$10K"
+              },
+              "profit": {
+                "value": 624.0,
+                "display": "$624"
+              },
+              "margin_pct": {
+                "value": 6.5,
+                "display": "6.5%"
+              }
+            },
+            {
+              "segment": "Europe",
+              "sales": {
+                "value": 98173.0,
+                "display": "$98K"
+              },
+              "profit": {
+                "value": 3858.0,
+                "display": "$4K"
+              },
+              "margin_pct": {
+                "value": 3.9,
+                "display": "3.9%"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "The data show where and when changes happened, not why. Contributing segments are not confirmed causes.",
+    "Order counts are not additive across rows and are excluded from this analysis.",
+    "The dataset contains no sales targets, so no target-gap analysis is possible.",
+    "Calendar years with less than 12 months of data: 2017 (4 months), 2018 (11 months), 2020 (6 months). Year-over-year comparisons use like-for-like windows only."
+  ]
+}

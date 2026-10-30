@@ -1,0 +1,418 @@
+{
+  "status": "ok",
+  "meta": {
+    "report": "AdventureWorks Sales (Power BI export, monthly)",
+    "currency": "USD",
+    "date_basis": "Order Date (selector 'By Order Date' at export time; verify if re-exporting)",
+    "scope": {
+      "channel": "Internet",
+      "group": null,
+      "category": null,
+      "start": null,
+      "end": null
+    },
+    "scope_text": "Internet, all regions, all categories, 2017-07 to 2020-06",
+    "period_start": "2017-07",
+    "period_end": "2020-06",
+    "months_covered": 36,
+    "thresholds": {
+      "sales_variation_pct": 15.0,
+      "sales_variation_abs_usd": 1000000,
+      "margin_drop_pts": 5.0,
+      "channel_gap_pts": 20.0,
+      "segment_deviation_pts": 10.0
+    },
+    "rule_counts": {
+      "R1_margin_alert": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R2_sales_variation": {
+        "flagged": 1,
+        "reported": 1
+      },
+      "R3_like_for_like_yoy": {
+        "flagged": 1,
+        "reported": 1
+      },
+      "R4_channel_gap": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R5_segment_outlier": {
+        "flagged": 0,
+        "reported": 0
+      }
+    }
+  },
+  "kpis": {
+    "sales": {
+      "value": 29358675.0,
+      "display": "$29.36M"
+    },
+    "cost": {
+      "value": 17277794.0,
+      "display": "$17.28M"
+    },
+    "profit": {
+      "value": 12080885.0,
+      "display": "$12.08M"
+    },
+    "profit_margin_pct": {
+      "value": 41.1,
+      "display": "41.1%"
+    }
+  },
+  "breakdown": {
+    "Category": [
+      {
+        "segment": "Bikes",
+        "sales": {
+          "value": 28318141.0,
+          "display": "$28.32M"
+        },
+        "profit": {
+          "value": 11505797.0,
+          "display": "$11.51M"
+        },
+        "margin_pct": {
+          "value": 40.6,
+          "display": "40.6%"
+        },
+        "share_of_sales_pct": {
+          "value": 96.5,
+          "display": "96.5%"
+        }
+      },
+      {
+        "segment": "Accessories",
+        "sales": {
+          "value": 700760.0,
+          "display": "$701K"
+        },
+        "profit": {
+          "value": 438677.0,
+          "display": "$439K"
+        },
+        "margin_pct": {
+          "value": 62.6,
+          "display": "62.6%"
+        },
+        "share_of_sales_pct": {
+          "value": 2.4,
+          "display": "2.4%"
+        }
+      },
+      {
+        "segment": "Clothing",
+        "sales": {
+          "value": 339774.0,
+          "display": "$340K"
+        },
+        "profit": {
+          "value": 136411.0,
+          "display": "$136K"
+        },
+        "margin_pct": {
+          "value": 40.1,
+          "display": "40.1%"
+        },
+        "share_of_sales_pct": {
+          "value": 1.2,
+          "display": "1.2%"
+        }
+      }
+    ],
+    "Group": [
+      {
+        "segment": "North America",
+        "sales": {
+          "value": 11367634.0,
+          "display": "$11.37M"
+        },
+        "profit": {
+          "value": 4730903.0,
+          "display": "$4.73M"
+        },
+        "margin_pct": {
+          "value": 41.6,
+          "display": "41.6%"
+        },
+        "share_of_sales_pct": {
+          "value": 38.7,
+          "display": "38.7%"
+        }
+      },
+      {
+        "segment": "Pacific",
+        "sales": {
+          "value": 9061001.0,
+          "display": "$9.06M"
+        },
+        "profit": {
+          "value": 3685856.0,
+          "display": "$3.69M"
+        },
+        "margin_pct": {
+          "value": 40.7,
+          "display": "40.7%"
+        },
+        "share_of_sales_pct": {
+          "value": 30.9,
+          "display": "30.9%"
+        }
+      },
+      {
+        "segment": "Europe",
+        "sales": {
+          "value": 8930040.0,
+          "display": "$8.93M"
+        },
+        "profit": {
+          "value": 3664126.0,
+          "display": "$3.66M"
+        },
+        "margin_pct": {
+          "value": 41.0,
+          "display": "41.0%"
+        },
+        "share_of_sales_pct": {
+          "value": 30.4,
+          "display": "30.4%"
+        }
+      }
+    ]
+  },
+  "yearly": [
+    {
+      "year": 2017,
+      "months_covered": 6,
+      "complete_year": false,
+      "sales": {
+        "value": 3863118.0,
+        "display": "$3.86M"
+      },
+      "profit": {
+        "value": 1551927.0,
+        "display": "$1.55M"
+      },
+      "margin_pct": {
+        "value": 40.2,
+        "display": "40.2%"
+      }
+    },
+    {
+      "year": 2018,
+      "months_covered": 12,
+      "complete_year": true,
+      "sales": {
+        "value": 6372462.0,
+        "display": "$6.37M"
+      },
+      "profit": {
+        "value": 2590260.0,
+        "display": "$2.59M"
+      },
+      "margin_pct": {
+        "value": 40.6,
+        "display": "40.6%"
+      }
+    },
+    {
+      "year": 2019,
+      "months_covered": 12,
+      "complete_year": true,
+      "sales": {
+        "value": 10692439.0,
+        "display": "$10.69M"
+      },
+      "profit": {
+        "value": 4443964.0,
+        "display": "$4.44M"
+      },
+      "margin_pct": {
+        "value": 41.6,
+        "display": "41.6%"
+      }
+    },
+    {
+      "year": 2020,
+      "months_covered": 6,
+      "complete_year": false,
+      "sales": {
+        "value": 8430656.0,
+        "display": "$8.43M"
+      },
+      "profit": {
+        "value": 3494734.0,
+        "display": "$3.49M"
+      },
+      "margin_pct": {
+        "value": 41.5,
+        "display": "41.5%"
+      }
+    }
+  ],
+  "anomalies": [
+    {
+      "id": "A01",
+      "rule": "R2_sales_variation",
+      "direction": "negative",
+      "period": "2020-06",
+      "what": "Month-over-month sales change versus 2020-05.",
+      "metrics": {
+        "sales": {
+          "value": 49007.0,
+          "display": "$49K"
+        },
+        "previous_sales": {
+          "value": 1951196.0,
+          "display": "$1.95M"
+        },
+        "sales_change": {
+          "value": -1902189.0,
+          "display": "-$1.90M"
+        },
+        "sales_change_pct": {
+          "value": -97.5,
+          "display": "-97.5%"
+        },
+        "profit": {
+          "value": 27366.0,
+          "display": "$27K"
+        },
+        "margin_pct": {
+          "value": 55.8,
+          "display": "55.8%"
+        }
+      },
+      "contributors": {
+        "largest_changes_by_segment": {
+          "Category": [
+            {
+              "segment": "Bikes",
+              "change": {
+                "value": -1848954.0,
+                "display": "-$1.85M"
+              }
+            },
+            {
+              "segment": "Accessories",
+              "change": {
+                "value": -33488.0,
+                "display": "-$33K"
+              }
+            }
+          ],
+          "Group": [
+            {
+              "segment": "North America",
+              "change": {
+                "value": -768349.0,
+                "display": "-$768K"
+              }
+            },
+            {
+              "segment": "Europe",
+              "change": {
+                "value": -663086.0,
+                "display": "-$663K"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "A02",
+      "rule": "R3_like_for_like_yoy",
+      "direction": "positive",
+      "period": "2020-01 to 2020-06",
+      "what": "Latest 6 months versus the same 6 months one year earlier (2019-01 to 2019-06).",
+      "metrics": {
+        "sales_now": {
+          "value": 8430656.0,
+          "display": "$8.43M"
+        },
+        "sales_before": {
+          "value": 3485302.0,
+          "display": "$3.49M"
+        },
+        "sales_change": {
+          "value": 4945354.0,
+          "display": "$4.95M"
+        },
+        "sales_change_pct": {
+          "value": 141.9,
+          "display": "141.9%"
+        },
+        "profit_now": {
+          "value": 3494734.0,
+          "display": "$3.49M"
+        },
+        "profit_before": {
+          "value": 1457539.0,
+          "display": "$1.46M"
+        },
+        "profit_change": {
+          "value": 2037195.0,
+          "display": "$2.04M"
+        },
+        "margin_now_pct": {
+          "value": 41.5,
+          "display": "41.5%"
+        },
+        "margin_before_pct": {
+          "value": 41.8,
+          "display": "41.8%"
+        },
+        "profit_change_pct": {
+          "value": 139.8,
+          "display": "139.8%"
+        }
+      },
+      "contributors": {
+        "largest_changes_by_segment": {
+          "Category": [
+            {
+              "segment": "Bikes",
+              "change": {
+                "value": 4443429.0,
+                "display": "$4.44M"
+              }
+            },
+            {
+              "segment": "Accessories",
+              "change": {
+                "value": 336126.0,
+                "display": "$336K"
+              }
+            }
+          ],
+          "Group": [
+            {
+              "segment": "North America",
+              "change": {
+                "value": 2519062.0,
+                "display": "$2.52M"
+              }
+            },
+            {
+              "segment": "Europe",
+              "change": {
+                "value": 1525600.0,
+                "display": "$1.53M"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "The data show where and when changes happened, not why. Contributing segments are not confirmed causes.",
+    "Order counts are not additive across rows and are excluded from this analysis.",
+    "The dataset contains no sales targets, so no target-gap analysis is possible.",
+    "Calendar years with less than 12 months of data: 2017 (6 months), 2020 (6 months). Year-over-year comparisons use like-for-like windows only."
+  ]
+}

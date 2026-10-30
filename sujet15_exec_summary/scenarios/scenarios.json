@@ -1,0 +1,22 @@
+[
+ {"id":"S01","type":"normal","description":"Global view, all channels, regions and categories","scope":{}},
+ {"id":"S02","type":"normal","description":"Reseller channel only (the 'Product details' table of the Power BI report is filtered on this channel)","scope":{"channel":"Reseller"}},
+ {"id":"S03","type":"normal","description":"Internet channel only","scope":{"channel":"Internet"}},
+ {"id":"S04","type":"normal","description":"North America only","scope":{"group":"North America"}},
+ {"id":"S05","type":"normal","description":"Europe only","scope":{"group":"Europe"}},
+ {"id":"S06","type":"normal","description":"Pacific only","scope":{"group":"Pacific"}},
+ {"id":"S07","type":"normal","description":"Bikes category only","scope":{"category":"Bikes"}},
+ {"id":"S08","type":"normal","description":"Components category only","scope":{"category":"Components"}},
+ {"id":"S09","type":"normal","description":"Accessories category (small, high margin)","scope":{"category":"Accessories"}},
+ {"id":"S10","type":"normal","description":"Calendar year 2019 (full year)","scope":{"start":"2019-01","end":"2019-12"}},
+ {"id":"S11","type":"normal","description":"Latest 6 months (2020-01 to 2020-06): like-for-like comparison with 2019","scope":{"start":"2020-01","end":"2020-06"}},
+ {"id":"S12","type":"no_anomaly","description":"FALSE-POSITIVE TEST: Components, 2018-07 to 2019-06, nothing should be flagged","scope":{"category":"Components","start":"2018-07","end":"2019-06"}},
+ {"id":"S13","type":"no_anomaly","description":"FALSE-POSITIVE TEST: Europe + Components, whole period","scope":{"group":"Europe","category":"Components"}},
+ {"id":"S14","type":"normal","description":"Complex slice: Reseller + Bikes + North America","scope":{"channel":"Reseller","category":"Bikes","group":"North America"}},
+ {"id":"S15","type":"no_data","description":"OUT OF DATA: region that does not exist (Germany)","scope":{"group":"Germany"}},
+ {"id":"S16","type":"no_data","description":"OUT OF DATA: year 2023 (data stop in 2020-06)","scope":{"start":"2023-01","end":"2023-12"}},
+ {"id":"S17","type":"no_data","description":"OUT OF DATA: category that does not exist (Helmets)","scope":{"category":"Helmets"}},
+ {"id":"S18","type":"normal","description":"Internet channel, 2019-07 to 2020-06","scope":{"channel":"Internet","start":"2019-07","end":"2020-06"}},
+ {"id":"S19","type":"normal","description":"Reseller channel, calendar 2018 (contains the June 2018 loss)","scope":{"channel":"Reseller","start":"2018-01","end":"2018-12"}},
+ {"id":"S20","type":"normal","description":"Pacific, 2019-07 to 2020-06","scope":{"group":"Pacific","start":"2019-07","end":"2020-06"}}
+]

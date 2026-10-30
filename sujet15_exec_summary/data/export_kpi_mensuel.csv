@@ -1,0 +1,462 @@
+﻿Year,Month,Category,Group,Channel,Sales,Cost,Profit,Profit %,Orders
+2017,2017-07-01 00:00:00,Bikes,Europe,Internet,$216226,$129590,$86636,40%,69
+2017,2017-07-01 00:00:00,Bikes,North America,Internet,$299721,$180083,$119638,40%,94
+2017,2017-07-01 00:00:00,Bikes,North America,Reseller,$453232,$438328,$14904,3%,37
+2017,2017-07-01 00:00:00,Bikes,Pacific,Internet,$418081,$248178,$169904,41%,126
+2017,2017-07-01 00:00:00,Components,North America,Reseller,$31526,$29917,$1608,5%,17
+2017,2017-07-01 00:00:00,Clothing,North America,Reseller,$2875,$3039,($164),-6%,24
+2017,2017-07-01 00:00:00,Accessories,North America,Reseller,$1696,$1010,$685,40%,15
+2017,2017-08-01 00:00:00,Bikes,Europe,Internet,$131689,$78789,$52900,40%,42
+2017,2017-08-01 00:00:00,Bikes,North America,Internet,$199701,$120058,$79644,40%,61
+2017,2017-08-01 00:00:00,Bikes,North America,Reseller,$1413254,$1355733,$57521,4%,72
+2017,2017-08-01 00:00:00,Bikes,Pacific,Internet,$188103,$113495,$74608,40%,56
+2017,2017-08-01 00:00:00,Components,North America,Reseller,$114523,$104186,$10337,9%,42
+2017,2017-08-01 00:00:00,Clothing,North America,Reseller,$7039,$7400,($361),-5%,50
+2017,2017-08-01 00:00:00,Accessories,North America,Reseller,$3593,$2141,$1452,40%,27
+2017,2017-09-01 00:00:00,Bikes,Europe,Internet,$107023,$64123,$42900,40%,35
+2017,2017-09-01 00:00:00,Bikes,North America,Internet,$188313,$113256,$75057,40%,61
+2017,2017-09-01 00:00:00,Bikes,North America,Reseller,$1832391,$1764038,$68353,4%,95
+2017,2017-09-01 00:00:00,Bikes,Pacific,Internet,$217993,$129829,$88165,40%,65
+2017,2017-09-01 00:00:00,Components,North America,Reseller,$164317,$149361,$14956,9%,51
+2017,2017-09-01 00:00:00,Clothing,North America,Reseller,$8722,$9122,($400),-5%,66
+2017,2017-09-01 00:00:00,Accessories,North America,Reseller,$5188,$3091,$2097,40%,40
+2017,2017-10-01 00:00:00,Bikes,Europe,Internet,$110741,$65916,$44825,40%,37
+2017,2017-10-01 00:00:00,Bikes,North America,Internet,$233304,$140426,$92878,40%,72
+2017,2017-10-01 00:00:00,Bikes,Pacific,Internet,$217637,$129310,$88326,41%,65
+2017,2017-11-01 00:00:00,Bikes,Europe,Internet,$144268,$86241,$58027,40%,48
+2017,2017-11-01 00:00:00,Bikes,North America,Internet,$326339,$195808,$130532,40%,100
+2017,2017-11-01 00:00:00,Bikes,North America,Reseller,$3696472,$3568618,$127855,3%,141
+2017,2017-11-01 00:00:00,Bikes,Pacific,Internet,$267232,$159666,$107566,40%,82
+2017,2017-11-01 00:00:00,Components,North America,Reseller,$305109,$277975,$27134,9%,95
+2017,2017-11-01 00:00:00,Clothing,North America,Reseller,$15741,$16727,($986),-6%,102
+2017,2017-11-01 00:00:00,Accessories,North America,Reseller,$9759,$5821,$3937,40%,53
+2017,2017-12-01 00:00:00,Bikes,Europe,Internet,$113620,$67674,$45946,40%,37
+2017,2017-12-01 00:00:00,Bikes,North America,Internet,$260018,$156304,$103714,40%,82
+2017,2017-12-01 00:00:00,Bikes,Pacific,Internet,$223109,$132448,$90661,41%,69
+2018,2018-01-01 00:00:00,Bikes,Europe,Internet,$136641,$81773,$54868,40%,45
+2018,2018-01-01 00:00:00,Bikes,North America,Internet,$287895,$173233,$114662,40%,89
+2018,2018-01-01 00:00:00,Bikes,North America,Reseller,$687178,$666410,$20768,3%,40
+2018,2018-01-01 00:00:00,Bikes,Pacific,Internet,$190022,$114476,$75547,40%,59
+2018,2018-01-01 00:00:00,Components,North America,Reseller,$23698,$21979,$1719,7%,11
+2018,2018-01-01 00:00:00,Clothing,North America,Reseller,$1655,$1691,($36),-2%,20
+2018,2018-01-01 00:00:00,Accessories,North America,Reseller,$585,$349,$237,40%,6
+2018,2018-02-01 00:00:00,Bikes,Europe,Internet,$127858,$76317,$51541,40%,41
+2018,2018-02-01 00:00:00,Bikes,North America,Internet,$245812,$147738,$98074,40%,74
+2018,2018-02-01 00:00:00,Bikes,North America,Reseller,$3190315,$3079090,$111225,3%,137
+2018,2018-02-01 00:00:00,Bikes,Pacific,Internet,$206724,$122537,$84186,41%,62
+2018,2018-02-01 00:00:00,Components,North America,Reseller,$151346,$134999,$16347,11%,54
+2018,2018-02-01 00:00:00,Clothing,North America,Reseller,$10048,$10561,($513),-5%,75
+2018,2018-02-01 00:00:00,Accessories,North America,Reseller,$4360,$2598,$1762,40%,39
+2018,2018-03-01 00:00:00,Bikes,Europe,Internet,$130005,$77584,$52421,40%,44
+2018,2018-03-01 00:00:00,Bikes,North America,Internet,$338561,$203813,$134748,40%,104
+2018,2018-03-01 00:00:00,Bikes,Pacific,Internet,$232307,$137442,$94865,41%,71
+2018,2018-04-01 00:00:00,Bikes,Europe,Internet,$126605,$75672,$50933,40%,43
+2018,2018-04-01 00:00:00,Bikes,North America,Internet,$311937,$186457,$125481,40%,97
+2018,2018-04-01 00:00:00,Bikes,North America,Reseller,$813847,$790261,$23586,3%,35
+2018,2018-04-01 00:00:00,Bikes,Pacific,Internet,$197833,$116962,$80871,41%,62
+2018,2018-04-01 00:00:00,Components,North America,Reseller,$63624,$59531,$4093,6%,25
+2018,2018-04-01 00:00:00,Clothing,North America,Reseller,$3653,$3795,($142),-4%,26
+2018,2018-04-01 00:00:00,Accessories,North America,Reseller,$1776,$1058,$718,40%,13
+2018,2018-05-01 00:00:00,Bikes,Europe,Internet,$137395,$81924,$55472,40%,48
+2018,2018-05-01 00:00:00,Bikes,North America,Internet,$335856,$201730,$134126,40%,103
+2018,2018-05-01 00:00:00,Bikes,North America,Reseller,$2082726,$2011664,$71062,3%,79
+2018,2018-05-01 00:00:00,Bikes,Pacific,Internet,$218011,$128462,$89549,41%,71
+2018,2018-05-01 00:00:00,Components,North America,Reseller,$171326,$156708,$14618,9%,54
+2018,2018-05-01 00:00:00,Clothing,North America,Reseller,$9487,$10134,($647),-7%,58
+2018,2018-05-01 00:00:00,Accessories,North America,Reseller,$5578,$3332,$2246,40%,29
+2018,2018-06-01 00:00:00,Bikes,Europe,Internet,$120359,$71673,$48687,40%,65
+2018,2018-06-01 00:00:00,Bikes,North America,Internet,$242869,$146141,$96729,40%,118
+2018,2018-06-01 00:00:00,Bikes,North America,Reseller,$849119,$1469160,($620041),-73%,61
+2018,2018-06-01 00:00:00,Bikes,Pacific,Internet,$122639,$72155,$50484,41%,62
+2018,2018-06-01 00:00:00,Components,North America,Reseller,$141297,$127742,$13555,10%,43
+2018,2018-06-01 00:00:00,Clothing,North America,Reseller,$7108,$7556,($448),-6%,44
+2018,2018-06-01 00:00:00,Accessories,North America,Reseller,$4280,$2550,$1730,40%,23
+2018,2018-07-01 00:00:00,Bikes,Europe,Internet,$139865,$83323,$56542,40%,76
+2018,2018-07-01 00:00:00,Bikes,Europe,Reseller,$124840,$131514,($6673),-5%,7
+2018,2018-07-01 00:00:00,Bikes,North America,Internet,$256396,$153606,$102791,40%,129
+2018,2018-07-01 00:00:00,Bikes,North America,Reseller,$1677087,$1691107,($14019),-1%,50
+2018,2018-07-01 00:00:00,Bikes,Pacific,Internet,$149740,$87627,$62113,41%,76
+2018,2018-07-01 00:00:00,Components,Europe,Reseller,$42657,$38094,$4564,11%,8
+2018,2018-07-01 00:00:00,Components,North America,Reseller,$465455,$411202,$54253,12%,56
+2018,2018-07-01 00:00:00,Clothing,Europe,Reseller,$9241,$7022,$2219,24%,7
+2018,2018-07-01 00:00:00,Clothing,North America,Reseller,$63930,$50125,$13805,22%,46
+2018,2018-07-01 00:00:00,Accessories,Europe,Reseller,$1444,$1231,$213,15%,5
+2018,2018-07-01 00:00:00,Accessories,North America,Reseller,$9034,$7707,$1327,15%,32
+2018,2018-08-01 00:00:00,Bikes,Europe,Internet,$140455,$83323,$57132,41%,77
+2018,2018-08-01 00:00:00,Bikes,Europe,Reseller,$320488,$321080,($592),-0%,11
+2018,2018-08-01 00:00:00,Bikes,North America,Internet,$102001,$59871,$42130,41%,65
+2018,2018-08-01 00:00:00,Bikes,North America,Reseller,$2359433,$2353598,$5835,0%,100
+2018,2018-08-01 00:00:00,Bikes,Pacific,Internet,$121154,$72806,$48349,40%,64
+2018,2018-08-01 00:00:00,Components,Europe,Reseller,$105810,$92330,$13480,13%,16
+2018,2018-08-01 00:00:00,Components,North America,Reseller,$693675,$609035,$84640,12%,109
+2018,2018-08-01 00:00:00,Clothing,Europe,Reseller,$16380,$12884,$3496,21%,10
+2018,2018-08-01 00:00:00,Clothing,North America,Reseller,$86852,$67094,$19759,23%,76
+2018,2018-08-01 00:00:00,Accessories,Europe,Reseller,$2873,$1975,$898,31%,7
+2018,2018-08-01 00:00:00,Accessories,North America,Reseller,$15679,$10829,$4850,31%,53
+2018,2018-09-01 00:00:00,Bikes,Europe,Internet,$124081,$73928,$50153,40%,68
+2018,2018-09-01 00:00:00,Bikes,Europe,Reseller,$297128,$290884,$6245,2%,8
+2018,2018-09-01 00:00:00,Bikes,North America,Internet,$94812,$55176,$39636,42%,58
+2018,2018-09-01 00:00:00,Bikes,North America,Reseller,$1859316,$1817326,$41991,2%,71
+2018,2018-09-01 00:00:00,Bikes,Pacific,Internet,$183354,$106521,$76833,42%,95
+2018,2018-09-01 00:00:00,Components,Europe,Reseller,$69757,$61290,$8467,12%,11
+2018,2018-09-01 00:00:00,Components,North America,Reseller,$557700,$489016,$68683,12%,91
+2018,2018-09-01 00:00:00,Clothing,Europe,Reseller,$4434,$3226,$1208,27%,6
+2018,2018-09-01 00:00:00,Clothing,North America,Reseller,$81695,$63401,$18294,22%,63
+2018,2018-09-01 00:00:00,Accessories,Europe,Reseller,$729,$501,$228,31%,3
+2018,2018-09-01 00:00:00,Accessories,North America,Reseller,$14600,$10242,$4358,30%,42
+2018,2018-10-01 00:00:00,Bikes,Europe,Internet,$131666,$78203,$53463,41%,73
+2018,2018-10-01 00:00:00,Bikes,Europe,Reseller,$95797,$95632,$165,0%,6
+2018,2018-10-01 00:00:00,Bikes,North America,Internet,$113221,$65527,$47694,42%,70
+2018,2018-10-01 00:00:00,Bikes,North America,Reseller,$1369996,$1342976,$27021,2%,50
+2018,2018-10-01 00:00:00,Bikes,Pacific,Internet,$110246,$66853,$43393,39%,61
+2018,2018-10-01 00:00:00,Components,Europe,Reseller,$13904,$12314,$1591,11%,6
+2018,2018-10-01 00:00:00,Components,North America,Reseller,$259158,$226047,$33111,13%,47
+2018,2018-10-01 00:00:00,Clothing,Europe,Reseller,$8217,$6210,$2007,24%,5
+2018,2018-10-01 00:00:00,Clothing,North America,Reseller,$45921,$35008,$10913,24%,46
+2018,2018-10-01 00:00:00,Accessories,Europe,Reseller,$1204,$828,$376,31%,5
+2018,2018-10-01 00:00:00,Accessories,North America,Reseller,$7957,$5503,$2454,31%,24
+2018,2018-11-01 00:00:00,Bikes,Europe,Internet,$199210,$117013,$82196,41%,114
+2018,2018-11-01 00:00:00,Bikes,Europe,Reseller,$256315,$247946,$8369,3%,14
+2018,2018-11-01 00:00:00,Bikes,North America,Internet,$158920,$91067,$67853,43%,98
+2018,2018-11-01 00:00:00,Bikes,North America,Reseller,$2238518,$2192839,$45679,2%,94
+2018,2018-11-01 00:00:00,Bikes,Pacific,Internet,$199147,$116137,$83010,42%,107
+2018,2018-11-01 00:00:00,Components,Europe,Reseller,$60436,$53186,$7250,12%,10
+2018,2018-11-01 00:00:00,Components,North America,Reseller,$413587,$361349,$52238,13%,82
+2018,2018-11-01 00:00:00,Clothing,Europe,Reseller,$10741,$8183,$2558,24%,10
+2018,2018-11-01 00:00:00,Clothing,North America,Reseller,$61638,$46930,$14707,24%,80
+2018,2018-11-01 00:00:00,Accessories,Europe,Reseller,$2492,$1732,$761,31%,6
+2018,2018-11-01 00:00:00,Accessories,North America,Reseller,$10090,$6956,$3134,31%,33
+2018,2018-12-01 00:00:00,Bikes,Europe,Internet,$140386,$82945,$57441,41%,77
+2018,2018-12-01 00:00:00,Bikes,Europe,Reseller,$206357,$199536,$6821,3%,9
+2018,2018-12-01 00:00:00,Bikes,North America,Internet,$112241,$64465,$47776,43%,69
+2018,2018-12-01 00:00:00,Bikes,North America,Reseller,$1527552,$1488039,$39513,3%,78
+2018,2018-12-01 00:00:00,Bikes,Pacific,Internet,$186238,$107727,$78511,42%,98
+2018,2018-12-01 00:00:00,Components,Europe,Reseller,$44410,$39179,$5231,12%,7
+2018,2018-12-01 00:00:00,Components,North America,Reseller,$332254,$290108,$42146,13%,72
+2018,2018-12-01 00:00:00,Clothing,Europe,Reseller,$2990,$2229,$761,25%,8
+2018,2018-12-01 00:00:00,Clothing,North America,Reseller,$61596,$47423,$14173,23%,64
+2018,2018-12-01 00:00:00,Accessories,Europe,Reseller,$234,$161,$73,31%,3
+2018,2018-12-01 00:00:00,Accessories,North America,Reseller,$9819,$6833,$2987,30%,33
+2019,2019-01-01 00:00:00,Bikes,Europe,Internet,$178378,$105134,$73244,41%,99
+2019,2019-01-01 00:00:00,Bikes,Europe,Reseller,$62128,$60513,$1616,3%,7
+2019,2019-01-01 00:00:00,Bikes,North America,Internet,$125987,$72416,$53571,43%,79
+2019,2019-01-01 00:00:00,Bikes,North America,Reseller,$1109583,$1084109,$25474,2%,51
+2019,2019-01-01 00:00:00,Bikes,Pacific,Internet,$225785,$129996,$95789,42%,120
+2019,2019-01-01 00:00:00,Components,Europe,Reseller,$3833,$3474,$360,9%,2
+2019,2019-01-01 00:00:00,Components,North America,Reseller,$107299,$93537,$13762,13%,34
+2019,2019-01-01 00:00:00,Clothing,Europe,Reseller,$4583,$3431,$1152,25%,5
+2019,2019-01-01 00:00:00,Clothing,North America,Reseller,$25389,$19072,$6317,25%,38
+2019,2019-01-01 00:00:00,Accessories,Europe,Reseller,$763,$524,$238,31%,3
+2019,2019-01-01 00:00:00,Accessories,North America,Reseller,$3964,$2725,$1239,31%,20
+2019,2019-02-01 00:00:00,Bikes,Europe,Internet,$169937,$100965,$68972,41%,91
+2019,2019-02-01 00:00:00,Bikes,Europe,Reseller,$225141,$216838,$8302,4%,13
+2019,2019-02-01 00:00:00,Bikes,North America,Internet,$93792,$53415,$40377,43%,60
+2019,2019-02-01 00:00:00,Bikes,North America,Reseller,$1929228,$1896452,$32776,2%,97
+2019,2019-02-01 00:00:00,Bikes,Pacific,Internet,$180786,$103655,$77131,43%,95
+2019,2019-02-01 00:00:00,Components,Europe,Reseller,$31594,$27759,$3835,12%,5
+2019,2019-02-01 00:00:00,Components,North America,Reseller,$151638,$131622,$20016,13%,67
+2019,2019-02-01 00:00:00,Clothing,Europe,Reseller,$6700,$5219,$1482,22%,9
+2019,2019-02-01 00:00:00,Clothing,North America,Reseller,$34983,$26369,$8614,25%,68
+2019,2019-02-01 00:00:00,Accessories,Europe,Reseller,$931,$640,$291,31%,4
+2019,2019-02-01 00:00:00,Accessories,North America,Reseller,$4632,$3185,$1448,31%,28
+2019,2019-03-01 00:00:00,Bikes,Europe,Internet,$189049,$111466,$77583,41%,109
+2019,2019-03-01 00:00:00,Bikes,Europe,Reseller,$155980,$152182,$3799,2%,8
+2019,2019-03-01 00:00:00,Bikes,North America,Internet,$126884,$72754,$54131,43%,84
+2019,2019-03-01 00:00:00,Bikes,North America,Reseller,$1203918,$1173159,$30758,3%,75
+2019,2019-03-01 00:00:00,Bikes,Pacific,Internet,$212545,$121879,$90667,43%,114
+2019,2019-03-01 00:00:00,Components,Europe,Reseller,$19512,$17063,$2449,13%,5
+2019,2019-03-01 00:00:00,Components,North America,Reseller,$145198,$125772,$19426,13%,59
+2019,2019-03-01 00:00:00,Clothing,Europe,Reseller,$1514,$1123,$391,26%,9
+2019,2019-03-01 00:00:00,Clothing,North America,Reseller,$32500,$24575,$7925,24%,55
+2019,2019-03-01 00:00:00,Accessories,North America,Reseller,$5333,$3675,$1658,31%,25
+2019,2019-04-01 00:00:00,Bikes,Europe,Internet,$173428,$102341,$71087,41%,107
+2019,2019-04-01 00:00:00,Bikes,Europe,Reseller,$77935,$76053,$1882,2%,6
+2019,2019-04-01 00:00:00,Bikes,North America,Internet,$170300,$96361,$73939,43%,107
+2019,2019-04-01 00:00:00,Bikes,North America,Reseller,$1431948,$1402391,$29557,2%,51
+2019,2019-04-01 00:00:00,Bikes,Pacific,Internet,$196965,$113081,$83884,43%,108
+2019,2019-04-01 00:00:00,Components,Europe,Reseller,$19161,$16932,$2229,12%,6
+2019,2019-04-01 00:00:00,Components,North America,Reseller,$273800,$239987,$33813,12%,46
+2019,2019-04-01 00:00:00,Clothing,Europe,Reseller,$6779,$5148,$1631,24%,7
+2019,2019-04-01 00:00:00,Clothing,North America,Reseller,$46019,$35009,$11010,24%,51
+2019,2019-04-01 00:00:00,Accessories,Europe,Reseller,$1141,$813,$328,29%,5
+2019,2019-04-01 00:00:00,Accessories,North America,Reseller,$8495,$6003,$2491,29%,26
+2019,2019-05-01 00:00:00,Bikes,Europe,Internet,$223395,$130579,$92817,42%,126
+2019,2019-05-01 00:00:00,Bikes,Europe,Reseller,$228534,$223100,$5434,2%,13
+2019,2019-05-01 00:00:00,Bikes,North America,Internet,$148347,$84612,$63735,43%,95
+2019,2019-05-01 00:00:00,Bikes,North America,Reseller,$2118248,$2085585,$32663,2%,94
+2019,2019-05-01 00:00:00,Bikes,Pacific,Internet,$206293,$118860,$87433,42%,113
+2019,2019-05-01 00:00:00,Components,Europe,Reseller,$58494,$50985,$7509,13%,8
+2019,2019-05-01 00:00:00,Components,North America,Reseller,$387528,$339799,$47729,12%,84
+2019,2019-05-01 00:00:00,Clothing,Europe,Internet,$50,$38,$11,23%,1
+2019,2019-05-01 00:00:00,Clothing,Europe,Reseller,$11121,$8351,$2770,25%,10
+2019,2019-05-01 00:00:00,Clothing,North America,Internet,$100,$77,$23,23%,2
+2019,2019-05-01 00:00:00,Clothing,North America,Reseller,$64440,$49145,$15295,24%,79
+2019,2019-05-01 00:00:00,Accessories,Europe,Internet,$365,$137,$229,63%,5
+2019,2019-05-01 00:00:00,Accessories,Europe,Reseller,$2203,$1532,$671,30%,8
+2019,2019-05-01 00:00:00,Accessories,North America,Internet,$96,$36,$60,63%,2
+2019,2019-05-01 00:00:00,Accessories,North America,Reseller,$10186,$7049,$3136,31%,36
+2019,2019-05-01 00:00:00,Accessories,Pacific,Internet,$44,$16,$28,63%,2
+2019,2019-06-01 00:00:00,Bikes,Europe,Internet,$322269,$195798,$126471,39%,190
+2019,2019-06-01 00:00:00,Bikes,Europe,Reseller,$171011,$167803,$3208,2%,7
+2019,2019-06-01 00:00:00,Bikes,North America,Internet,$276166,$161520,$114645,42%,178
+2019,2019-06-01 00:00:00,Bikes,North America,Reseller,$1370937,$1339774,$31163,2%,73
+2019,2019-06-01 00:00:00,Bikes,Pacific,Internet,$244021,$143262,$100759,41%,133
+2019,2019-06-01 00:00:00,Components,Europe,Reseller,$43591,$37973,$5618,13%,7
+2019,2019-06-01 00:00:00,Components,North America,Reseller,$328652,$287093,$41558,13%,65
+2019,2019-06-01 00:00:00,Clothing,Europe,Internet,$2623,$1807,$816,31%,64
+2019,2019-06-01 00:00:00,Clothing,Europe,Reseller,$2721,$1982,$738,27%,8
+2019,2019-06-01 00:00:00,Clothing,North America,Internet,$2444,$1501,$943,39%,55
+2019,2019-06-01 00:00:00,Clothing,North America,Reseller,$60330,$45420,$14910,25%,64
+2019,2019-06-01 00:00:00,Clothing,Pacific,Internet,$1290,$837,$453,35%,31
+2019,2019-06-01 00:00:00,Accessories,Europe,Internet,$5093,$1905,$3188,63%,145
+2019,2019-06-01 00:00:00,Accessories,Europe,Reseller,$262,$180,$82,31%,1
+2019,2019-06-01 00:00:00,Accessories,North America,Internet,$5011,$1874,$3137,63%,134
+2019,2019-06-01 00:00:00,Accessories,North America,Reseller,$10369,$7238,$3131,30%,32
+2019,2019-06-01 00:00:00,Accessories,Pacific,Internet,$3859,$1443,$2416,63%,101
+2019,2019-07-01 00:00:00,Bikes,Europe,Internet,$284418,$169410,$115007,40%,181
+2019,2019-07-01 00:00:00,Bikes,Europe,Reseller,$260419,$310751,($50333),-19%,14
+2019,2019-07-01 00:00:00,Bikes,North America,Internet,$313088,$182867,$130220,42%,205
+2019,2019-07-01 00:00:00,Bikes,North America,Reseller,$1623416,$1772025,($148610),-9%,60
+2019,2019-07-01 00:00:00,Bikes,Pacific,Internet,$174516,$108425,$66091,38%,109
+2019,2019-07-01 00:00:00,Bikes,Pacific,Reseller,$39903,$57255,($17353),-43%,7
+2019,2019-07-01 00:00:00,Components,Europe,Reseller,$98173,$94316,$3858,4%,15
+2019,2019-07-01 00:00:00,Components,North America,Reseller,$521044,$498321,$22723,4%,61
+2019,2019-07-01 00:00:00,Components,Pacific,Reseller,$9599,$8975,$624,7%,4
+2019,2019-07-01 00:00:00,Clothing,Europe,Internet,$5810,$3657,$2153,37%,149
+2019,2019-07-01 00:00:00,Clothing,Europe,Reseller,$20453,$21337,($884),-4%,12
+2019,2019-07-01 00:00:00,Clothing,North America,Internet,$13150,$7451,$5699,43%,272
+2019,2019-07-01 00:00:00,Clothing,North America,Reseller,$61169,$60703,$466,1%,47
+2019,2019-07-01 00:00:00,Clothing,Pacific,Internet,$4376,$2730,$1646,38%,98
+2019,2019-07-01 00:00:00,Clothing,Pacific,Reseller,$323,$366,($43),-13%,3
+2019,2019-07-01 00:00:00,Accessories,Europe,Internet,$14126,$5283,$8843,63%,374
+2019,2019-07-01 00:00:00,Accessories,Europe,Reseller,$8945,$6859,$2086,23%,8
+2019,2019-07-01 00:00:00,Accessories,North America,Internet,$28709,$10737,$17971,63%,706
+2019,2019-07-01 00:00:00,Accessories,North America,Reseller,$22207,$16598,$5608,25%,28
+2019,2019-07-01 00:00:00,Accessories,Pacific,Internet,$9222,$3449,$5773,63%,243
+2019,2019-08-01 00:00:00,Bikes,Europe,Internet,$334200,$198907,$135293,40%,208
+2019,2019-08-01 00:00:00,Bikes,Europe,Reseller,$846403,$1003914,($157511),-19%,32
+2019,2019-08-01 00:00:00,Bikes,North America,Internet,$301824,$177984,$123839,41%,210
+2019,2019-08-01 00:00:00,Bikes,North America,Reseller,$2151590,$2272310,($120719),-6%,108
+2019,2019-08-01 00:00:00,Bikes,Pacific,Internet,$317497,$190905,$126592,40%,183
+2019,2019-08-01 00:00:00,Bikes,Pacific,Reseller,$103881,$148515,($44633),-43%,7
+2019,2019-08-01 00:00:00,Components,Europe,Reseller,$273340,$258802,$14538,5%,43
+2019,2019-08-01 00:00:00,Components,North America,Reseller,$629366,$596884,$32483,5%,113
+2019,2019-08-01 00:00:00,Components,Pacific,Reseller,$25331,$25243,$88,0%,9
+2019,2019-08-01 00:00:00,Clothing,Europe,Internet,$6603,$4131,$2472,37%,157
+2019,2019-08-01 00:00:00,Clothing,Europe,Reseller,$35048,$34191,$856,2%,28
+2019,2019-08-01 00:00:00,Clothing,North America,Internet,$14093,$7914,$6179,44%,266
+2019,2019-08-01 00:00:00,Clothing,North America,Reseller,$90551,$85895,$4656,5%,81
+2019,2019-08-01 00:00:00,Clothing,Pacific,Internet,$6103,$3846,$2257,37%,134
+2019,2019-08-01 00:00:00,Clothing,Pacific,Reseller,$3056,$2850,$207,7%,5
+2019,2019-08-01 00:00:00,Accessories,Europe,Internet,$15916,$5952,$9963,63%,424
+2019,2019-08-01 00:00:00,Accessories,Europe,Reseller,$16804,$11244,$5560,33%,17
+2019,2019-08-01 00:00:00,Accessories,North America,Internet,$27830,$10409,$17422,63%,669
+2019,2019-08-01 00:00:00,Accessories,North America,Reseller,$35589,$22691,$12898,36%,53
+2019,2019-08-01 00:00:00,Accessories,Pacific,Internet,$10129,$3788,$6341,63%,276
+2019,2019-08-01 00:00:00,Accessories,Pacific,Reseller,$2012,$1254,$758,38%,2
+2019,2019-09-01 00:00:00,Bikes,Europe,Internet,$315925,$188413,$127512,40%,195
+2019,2019-09-01 00:00:00,Bikes,Europe,Reseller,$577280,$644337,($67057),-12%,25
+2019,2019-09-01 00:00:00,Bikes,North America,Internet,$343386,$202870,$140516,41%,228
+2019,2019-09-01 00:00:00,Bikes,North America,Reseller,$2131589,$2376720,($245131),-11%,104
+2019,2019-09-01 00:00:00,Bikes,Pacific,Internet,$319062,$191242,$127820,40%,183
+2019,2019-09-01 00:00:00,Bikes,Pacific,Reseller,$199023,$241159,($42136),-21%,12
+2019,2019-09-01 00:00:00,Components,Europe,Reseller,$206125,$197303,$8823,4%,29
+2019,2019-09-01 00:00:00,Components,North America,Reseller,$709588,$670294,$39293,6%,114
+2019,2019-09-01 00:00:00,Components,Pacific,Reseller,$48942,$44793,$4148,8%,15
+2019,2019-09-01 00:00:00,Clothing,Europe,Internet,$6288,$4014,$2274,36%,156
+2019,2019-09-01 00:00:00,Clothing,Europe,Reseller,$24903,$23654,$1249,5%,24
+2019,2019-09-01 00:00:00,Clothing,North America,Internet,$13776,$7758,$6018,44%,263
+2019,2019-09-01 00:00:00,Clothing,North America,Reseller,$83239,$79679,$3560,4%,79
+2019,2019-09-01 00:00:00,Clothing,Pacific,Internet,$5207,$3108,$2099,40%,124
+2019,2019-09-01 00:00:00,Clothing,Pacific,Reseller,$12129,$11955,$174,1%,8
+2019,2019-09-01 00:00:00,Accessories,Europe,Internet,$15240,$5700,$9541,63%,398
+2019,2019-09-01 00:00:00,Accessories,Europe,Reseller,$11984,$7965,$4018,34%,14
+2019,2019-09-01 00:00:00,Accessories,North America,Internet,$26195,$9797,$16398,63%,680
+2019,2019-09-01 00:00:00,Accessories,North America,Reseller,$36088,$23441,$12646,35%,49
+2019,2019-09-01 00:00:00,Accessories,Pacific,Internet,$11435,$4277,$7158,63%,295
+2019,2019-09-01 00:00:00,Accessories,Pacific,Reseller,$6685,$4198,$2487,37%,7
+2019,2019-10-01 00:00:00,Bikes,Europe,Internet,$384178,$229817,$154362,40%,242
+2019,2019-10-01 00:00:00,Bikes,Europe,Reseller,$283174,$291025,($7851),-3%,14
+2019,2019-10-01 00:00:00,Bikes,North America,Internet,$461955,$273201,$188754,41%,296
+2019,2019-10-01 00:00:00,Bikes,North America,Reseller,$1539139,$1566199,($27060),-2%,62
+2019,2019-10-01 00:00:00,Bikes,Pacific,Internet,$330527,$198200,$132327,40%,198
+2019,2019-10-01 00:00:00,Bikes,Pacific,Reseller,$51635,$53494,($1859),-4%,6
+2019,2019-10-01 00:00:00,Components,Europe,Reseller,$53441,$50849,$2592,5%,16
+2019,2019-10-01 00:00:00,Components,North America,Reseller,$254357,$238025,$16331,6%,57
+2019,2019-10-01 00:00:00,Components,Pacific,Reseller,$3136,$2632,$503,16%,4
+2019,2019-10-01 00:00:00,Clothing,Europe,Internet,$5882,$3721,$2161,37%,156
+2019,2019-10-01 00:00:00,Clothing,Europe,Reseller,$17240,$17284,($43),-0%,13
+2019,2019-10-01 00:00:00,Clothing,North America,Internet,$14708,$8273,$6434,44%,309
+2019,2019-10-01 00:00:00,Clothing,North America,Reseller,$50439,$46549,$3889,8%,45
+2019,2019-10-01 00:00:00,Clothing,Pacific,Internet,$5761,$3643,$2118,37%,112
+2019,2019-10-01 00:00:00,Clothing,Pacific,Reseller,$561,$721,($159),-28%,2
+2019,2019-10-01 00:00:00,Accessories,Europe,Internet,$14367,$5373,$8994,63%,397
+2019,2019-10-01 00:00:00,Accessories,Europe,Reseller,$8285,$5356,$2929,35%,10
+2019,2019-10-01 00:00:00,Accessories,North America,Internet,$30765,$11506,$19259,63%,788
+2019,2019-10-01 00:00:00,Accessories,North America,Reseller,$20700,$13207,$7493,36%,28
+2019,2019-10-01 00:00:00,Accessories,Pacific,Internet,$11891,$4447,$7444,63%,288
+2019,2019-10-01 00:00:00,Accessories,Pacific,Reseller,$9,$6,$3,38%,1
+2019,2019-11-01 00:00:00,Bikes,Europe,Internet,$546966,$323228,$223738,41%,358
+2019,2019-11-01 00:00:00,Bikes,Europe,Reseller,$824232,$843919,($19688),-2%,34
+2019,2019-11-01 00:00:00,Bikes,North America,Internet,$674814,$396038,$278776,41%,429
+2019,2019-11-01 00:00:00,Bikes,North America,Reseller,$1875251,$1884373,($9121),-0%,107
+2019,2019-11-01 00:00:00,Bikes,Pacific,Internet,$353553,$221021,$132533,37%,233
+2019,2019-11-01 00:00:00,Bikes,Pacific,Reseller,$106464,$109810,($3345),-3%,7
+2019,2019-11-01 00:00:00,Components,Europe,Reseller,$160898,$152128,$8771,5%,28
+2019,2019-11-01 00:00:00,Components,North America,Reseller,$370216,$346003,$24213,7%,100
+2019,2019-11-01 00:00:00,Components,Pacific,Reseller,$15292,$15215,$77,1%,5
+2019,2019-11-01 00:00:00,Clothing,Europe,Internet,$8735,$5869,$2866,33%,209
+2019,2019-11-01 00:00:00,Clothing,Europe,Reseller,$24304,$23029,$1275,5%,25
+2019,2019-11-01 00:00:00,Clothing,North America,Internet,$15373,$8757,$6615,43%,322
+2019,2019-11-01 00:00:00,Clothing,North America,Reseller,$64342,$58623,$5719,9%,81
+2019,2019-11-01 00:00:00,Clothing,Pacific,Internet,$5877,$3588,$2289,39%,130
+2019,2019-11-01 00:00:00,Clothing,Pacific,Reseller,$1815,$1866,($51),-3%,4
+2019,2019-11-01 00:00:00,Accessories,Europe,Internet,$19351,$7237,$12114,63%,515
+2019,2019-11-01 00:00:00,Accessories,Europe,Reseller,$12675,$8190,$4485,35%,16
+2019,2019-11-01 00:00:00,Accessories,North America,Internet,$33264,$12441,$20823,63%,817
+2019,2019-11-01 00:00:00,Accessories,North America,Reseller,$27017,$17191,$9826,36%,48
+2019,2019-11-01 00:00:00,Accessories,Pacific,Internet,$10802,$4040,$6762,63%,292
+2019,2019-11-01 00:00:00,Accessories,Pacific,Reseller,$654,$408,$246,38%,3
+2019,2019-12-01 00:00:00,Bikes,Europe,Internet,$395829,$235959,$159870,40%,249
+2019,2019-12-01 00:00:00,Bikes,Europe,Reseller,$601243,$612917,($11674),-2%,22
+2019,2019-12-01 00:00:00,Bikes,North America,Internet,$484544,$284563,$199981,41%,307
+2019,2019-12-01 00:00:00,Bikes,North America,Reseller,$2072803,$2085027,($12224),-1%,107
+2019,2019-12-01 00:00:00,Bikes,Pacific,Internet,$374196,$225941,$148254,40%,223
+2019,2019-12-01 00:00:00,Bikes,Pacific,Reseller,$179739,$182449,($2710),-2%,11
+2019,2019-12-01 00:00:00,Components,Europe,Reseller,$107089,$100444,$6645,6%,23
+2019,2019-12-01 00:00:00,Components,North America,Reseller,$403486,$375335,$28151,7%,104
+2019,2019-12-01 00:00:00,Components,Pacific,Reseller,$22776,$20007,$2769,12%,10
+2019,2019-12-01 00:00:00,Clothing,Europe,Internet,$7505,$4894,$2611,35%,188
+2019,2019-12-01 00:00:00,Clothing,Europe,Reseller,$17038,$16032,$1006,6%,20
+2019,2019-12-01 00:00:00,Clothing,North America,Internet,$15450,$8983,$6467,42%,316
+2019,2019-12-01 00:00:00,Clothing,North America,Reseller,$59934,$55132,$4802,8%,75
+2019,2019-12-01 00:00:00,Clothing,Pacific,Internet,$6264,$3831,$2434,39%,139
+2019,2019-12-01 00:00:00,Clothing,Pacific,Reseller,$8238,$8069,$169,2%,8
+2019,2019-12-01 00:00:00,Accessories,Europe,Internet,$15834,$5922,$9912,63%,428
+2019,2019-12-01 00:00:00,Accessories,Europe,Reseller,$7689,$4852,$2837,37%,12
+2019,2019-12-01 00:00:00,Accessories,North America,Internet,$29477,$11025,$18453,63%,766
+2019,2019-12-01 00:00:00,Accessories,North America,Reseller,$24686,$15799,$8888,36%,40
+2019,2019-12-01 00:00:00,Accessories,Pacific,Internet,$11145,$4168,$6977,63%,317
+2019,2019-12-01 00:00:00,Accessories,Pacific,Reseller,$6228,$3896,$2332,37%,7
+2020,2020-01-01 00:00:00,Bikes,Europe,Internet,$508352,$300728,$207624,41%,313
+2020,2020-01-01 00:00:00,Bikes,Europe,Reseller,$188164,$191807,($3642),-2%,17
+2020,2020-01-01 00:00:00,Bikes,North America,Internet,$552142,$326261,$225881,41%,342
+2020,2020-01-01 00:00:00,Bikes,North America,Reseller,$1203595,$1212419,($8823),-1%,58
+2020,2020-01-01 00:00:00,Bikes,Pacific,Internet,$421333,$254963,$166370,39%,253
+2020,2020-01-01 00:00:00,Bikes,Pacific,Reseller,$61365,$63574,($2209),-4%,6
+2020,2020-01-01 00:00:00,Components,Europe,Reseller,$29357,$28170,$1187,4%,9
+2020,2020-01-01 00:00:00,Components,North America,Reseller,$117487,$108885,$8601,7%,38
+2020,2020-01-01 00:00:00,Components,Pacific,Reseller,$1283,$1106,$178,14%,3
+2020,2020-01-01 00:00:00,Clothing,Europe,Internet,$6781,$4512,$2270,33%,185
+2020,2020-01-01 00:00:00,Clothing,Europe,Reseller,$11612,$11868,($256),-2%,13
+2020,2020-01-01 00:00:00,Clothing,North America,Internet,$17015,$9555,$7460,44%,343
+2020,2020-01-01 00:00:00,Clothing,North America,Reseller,$32308,$28996,$3312,10%,49
+2020,2020-01-01 00:00:00,Clothing,Pacific,Internet,$6101,$3770,$2331,38%,156
+2020,2020-01-01 00:00:00,Clothing,Pacific,Reseller,$654,$714,($60),-9%,2
+2020,2020-01-01 00:00:00,Accessories,Europe,Internet,$18395,$6880,$11515,63%,501
+2020,2020-01-01 00:00:00,Accessories,Europe,Reseller,$4894,$3051,$1844,38%,9
+2020,2020-01-01 00:00:00,Accessories,North America,Internet,$29471,$11022,$18449,63%,779
+2020,2020-01-01 00:00:00,Accessories,North America,Reseller,$11750,$7324,$4426,38%,21
+2020,2020-01-01 00:00:00,Accessories,Pacific,Internet,$13049,$4880,$8168,63%,354
+2020,2020-01-01 00:00:00,Accessories,Pacific,Reseller,$77,$48,$29,38%,1
+2020,2020-02-01 00:00:00,Bikes,Europe,Internet,$437718,$258733,$178985,41%,281
+2020,2020-02-01 00:00:00,Bikes,Europe,Reseller,$642034,$654397,($12363),-2%,35
+2020,2020-02-01 00:00:00,Bikes,North America,Internet,$506073,$299504,$206569,41%,322
+2020,2020-02-01 00:00:00,Bikes,North America,Reseller,$1647939,$1654208,($6268),-0%,99
+2020,2020-02-01 00:00:00,Bikes,Pacific,Internet,$343838,$207491,$136348,40%,217
+2020,2020-02-01 00:00:00,Bikes,Pacific,Reseller,$63844,$66004,($2160),-3%,8
+2020,2020-02-01 00:00:00,Components,Europe,Reseller,$98488,$92501,$5987,6%,19
+2020,2020-02-01 00:00:00,Components,North America,Reseller,$163066,$150139,$12927,8%,77
+2020,2020-02-01 00:00:00,Components,Pacific,Reseller,$12104,$12075,$28,0%,3
+2020,2020-02-01 00:00:00,Clothing,Europe,Internet,$6263,$4114,$2150,34%,180
+2020,2020-02-01 00:00:00,Clothing,Europe,Reseller,$15658,$14513,$1144,7%,21
+2020,2020-02-01 00:00:00,Clothing,North America,Internet,$14252,$8121,$6130,43%,296
+2020,2020-02-01 00:00:00,Clothing,North America,Reseller,$36483,$31500,$4983,14%,84
+2020,2020-02-01 00:00:00,Clothing,Pacific,Internet,$6422,$3989,$2433,38%,127
+2020,2020-02-01 00:00:00,Clothing,Pacific,Reseller,$550,$366,$184,33%,5
+2020,2020-02-01 00:00:00,Accessories,Europe,Internet,$16112,$6026,$10086,63%,446
+2020,2020-02-01 00:00:00,Accessories,Europe,Reseller,$6939,$4365,$2575,37%,9
+2020,2020-02-01 00:00:00,Accessories,North America,Internet,$29045,$10863,$18182,63%,743
+2020,2020-02-01 00:00:00,Accessories,North America,Reseller,$12192,$7600,$4592,38%,27
+2020,2020-02-01 00:00:00,Accessories,Pacific,Internet,$11022,$4122,$6900,63%,285
+2020,2020-02-01 00:00:00,Accessories,Pacific,Reseller,$4,$3,$2,38%,1
+2020,2020-03-01 00:00:00,Bikes,Europe,Internet,$529810,$315241,$214569,40%,351
+2020,2020-03-01 00:00:00,Bikes,Europe,Reseller,$469247,$477179,($7932),-2%,22
+2020,2020-03-01 00:00:00,Bikes,North America,Internet,$614101,$364303,$249798,41%,392
+2020,2020-03-01 00:00:00,Bikes,North America,Reseller,$1779549,$1793474,($13925),-1%,106
+2020,2020-03-01 00:00:00,Bikes,Pacific,Internet,$448869,$271710,$177159,39%,283
+2020,2020-03-01 00:00:00,Bikes,Pacific,Reseller,$182553,$187548,($4995),-3%,13
+2020,2020-03-01 00:00:00,Components,Europe,Reseller,$50331,$46087,$4243,8%,15
+2020,2020-03-01 00:00:00,Components,North America,Reseller,$172104,$157962,$14142,8%,76
+2020,2020-03-01 00:00:00,Components,Pacific,Reseller,$11132,$9445,$1687,15%,8
+2020,2020-03-01 00:00:00,Clothing,Europe,Internet,$7942,$5350,$2591,33%,209
+2020,2020-03-01 00:00:00,Clothing,Europe,Reseller,$10537,$9917,$619,6%,17
+2020,2020-03-01 00:00:00,Clothing,North America,Internet,$18562,$10394,$8168,44%,358
+2020,2020-03-01 00:00:00,Clothing,North America,Reseller,$39862,$34380,$5482,14%,77
+2020,2020-03-01 00:00:00,Clothing,Pacific,Internet,$6361,$3742,$2618,41%,144
+2020,2020-03-01 00:00:00,Clothing,Pacific,Reseller,$4329,$4165,$164,4%,9
+2020,2020-03-01 00:00:00,Accessories,Europe,Internet,$19700,$7368,$12332,63%,521
+2020,2020-03-01 00:00:00,Accessories,Europe,Reseller,$4289,$2673,$1615,38%,12
+2020,2020-03-01 00:00:00,Accessories,North America,Internet,$32447,$12135,$20312,63%,837
+2020,2020-03-01 00:00:00,Accessories,North America,Reseller,$12138,$7567,$4570,38%,36
+2020,2020-03-01 00:00:00,Accessories,Pacific,Internet,$13388,$5007,$8381,63%,359
+2020,2020-03-01 00:00:00,Accessories,Pacific,Reseller,$2584,$1610,$973,38%,5
+2020,2020-04-01 00:00:00,Bikes,Europe,Internet,$527454,$314943,$212511,40%,353
+2020,2020-04-01 00:00:00,Bikes,Europe,Reseller,$253811,$260493,($6682),-3%,15
+2020,2020-04-01 00:00:00,Bikes,North America,Internet,$775259,$452366,$322893,42%,476
+2020,2020-04-01 00:00:00,Bikes,North America,Reseller,$1477390,$1496179,($18789),-1%,52
+2020,2020-04-01 00:00:00,Bikes,Pacific,Internet,$393853,$238375,$155477,39%,257
+2020,2020-04-01 00:00:00,Bikes,Pacific,Reseller,$54280,$56234,($1954),-4%,6
+2020,2020-04-01 00:00:00,Components,Europe,Reseller,$50884,$48806,$2078,4%,17
+2020,2020-04-01 00:00:00,Components,North America,Reseller,$273625,$255632,$17993,7%,57
+2020,2020-04-01 00:00:00,Components,Pacific,Reseller,$3859,$3427,$432,11%,6
+2020,2020-04-01 00:00:00,Clothing,Europe,Internet,$7258,$4678,$2580,36%,194
+2020,2020-04-01 00:00:00,Clothing,Europe,Reseller,$15715,$15983,($268),-2%,11
+2020,2020-04-01 00:00:00,Clothing,North America,Internet,$17236,$9777,$7459,43%,353
+2020,2020-04-01 00:00:00,Clothing,North America,Reseller,$48859,$46419,$2440,5%,44
+2020,2020-04-01 00:00:00,Clothing,Pacific,Internet,$5810,$3647,$2162,37%,134
+2020,2020-04-01 00:00:00,Clothing,Pacific,Reseller,$676,$768,($93),-14%,3
+2020,2020-04-01 00:00:00,Accessories,Europe,Internet,$19438,$7270,$12168,63%,497
+2020,2020-04-01 00:00:00,Accessories,Europe,Reseller,$7824,$5014,$2810,36%,10
+2020,2020-04-01 00:00:00,Accessories,North America,Internet,$36127,$13512,$22616,63%,881
+2020,2020-04-01 00:00:00,Accessories,North America,Reseller,$19803,$12805,$6998,35%,29
+2020,2020-04-01 00:00:00,Accessories,Pacific,Internet,$13454,$5032,$8422,63%,353
+2020,2020-05-01 00:00:00,Bikes,Europe,Internet,$645533,$378678,$266855,41%,410
+2020,2020-05-01 00:00:00,Bikes,Europe,Reseller,$793881,$818450,($24569),-3%,33
+2020,2020-05-01 00:00:00,Bikes,North America,Internet,$744581,$440422,$304159,41%,477
+2020,2020-05-01 00:00:00,Bikes,North America,Reseller,$1767039,$1820837,($53798),-3%,105
+2020,2020-05-01 00:00:00,Bikes,Pacific,Internet,$458840,$278148,$180692,39%,299
+2020,2020-05-01 00:00:00,Bikes,Pacific,Reseller,$98423,$101966,($3543),-4%,5
+2020,2020-05-01 00:00:00,Components,Europe,Reseller,$165847,$157114,$8732,5%,28
+2020,2020-05-01 00:00:00,Components,North America,Reseller,$347975,$325244,$22731,7%,98
+2020,2020-05-01 00:00:00,Components,Pacific,Reseller,$15619,$15426,$193,1%,6
+2020,2020-05-01 00:00:00,Clothing,Europe,Internet,$8048,$5333,$2715,34%,226
+2020,2020-05-01 00:00:00,Clothing,Europe,Reseller,$24345,$22486,$1859,8%,27
+2020,2020-05-01 00:00:00,Clothing,North America,Internet,$20609,$11773,$8836,43%,409
+2020,2020-05-01 00:00:00,Clothing,North America,Reseller,$59240,$52193,$7047,12%,84
+2020,2020-05-01 00:00:00,Clothing,Pacific,Internet,$7368,$4775,$2592,35%,156
+2020,2020-05-01 00:00:00,Clothing,Pacific,Reseller,$1544,$1388,$156,10%,4
+2020,2020-05-01 00:00:00,Accessories,Europe,Internet,$20444,$7646,$12798,63%,539
+2020,2020-05-01 00:00:00,Accessories,Europe,Reseller,$13309,$8499,$4810,36%,15
+2020,2020-05-01 00:00:00,Accessories,North America,Internet,$32214,$12048,$20166,63%,851
+2020,2020-05-01 00:00:00,Accessories,North America,Reseller,$26897,$16993,$9904,37%,48
+2020,2020-05-01 00:00:00,Accessories,Pacific,Internet,$13559,$5071,$8488,63%,366
+2020,2020-05-01 00:00:00,Accessories,Pacific,Reseller,$483,$301,$182,38%,4
+2020,2020-06-01 00:00:00,Bikes,Europe,Reseller,$547886,$567677,($19791),-4%,23
+2020,2020-06-01 00:00:00,Bikes,North America,Reseller,$1985532,$2032741,($47209),-2%,106
+2020,2020-06-01 00:00:00,Bikes,Pacific,Reseller,$182710,$187959,($5248),-3%,15
+2020,2020-06-01 00:00:00,Components,Europe,Reseller,$109725,$101997,$7727,7%,24
+2020,2020-06-01 00:00:00,Components,North America,Reseller,$433548,$407373,$26175,6%,105
+2020,2020-06-01 00:00:00,Components,Pacific,Reseller,$34580,$31607,$2973,9%,12
+2020,2020-06-01 00:00:00,Clothing,Europe,Internet,$3051,$1799,$1252,41%,79
+2020,2020-06-01 00:00:00,Clothing,Europe,Reseller,$16267,$15256,$1010,6%,22
+2020,2020-06-01 00:00:00,Clothing,North America,Internet,$9906,$5615,$4290,43%,190
+2020,2020-06-01 00:00:00,Clothing,North America,Reseller,$58336,$53021,$5315,9%,80
+2020,2020-06-01 00:00:00,Clothing,Pacific,Internet,$3321,$1985,$1336,40%,69
+2020,2020-06-01 00:00:00,Clothing,Pacific,Reseller,$9040,$8940,$101,1%,9
+2020,2020-06-01 00:00:00,Accessories,Europe,Internet,$7888,$2950,$4938,63%,202
+2020,2020-06-01 00:00:00,Accessories,Europe,Reseller,$7795,$4925,$2870,37%,13
+2020,2020-06-01 00:00:00,Accessories,North America,Internet,$19149,$7162,$11987,63%,492
+2020,2020-06-01 00:00:00,Accessories,North America,Reseller,$25604,$16308,$9296,36%,46
+2020,2020-06-01 00:00:00,Accessories,Pacific,Internet,$5692,$2129,$3563,63%,140
+2020,2020-06-01 00:00:00,Accessories,Pacific,Reseller,$5212,$3249,$1963,38%,7

@@ -1,0 +1,426 @@
+{
+  "status": "ok",
+  "meta": {
+    "report": "AdventureWorks Sales (Power BI export, monthly)",
+    "currency": "USD",
+    "date_basis": "Order Date (selector 'By Order Date' at export time; verify if re-exporting)",
+    "scope": {
+      "channel": "Reseller",
+      "group": "North America",
+      "category": "Bikes",
+      "start": null,
+      "end": null
+    },
+    "scope_text": "Reseller, North America, Bikes, 2017-07 to 2020-06",
+    "period_start": "2017-07",
+    "period_end": "2020-06",
+    "months_covered": 33,
+    "thresholds": {
+      "sales_variation_pct": 15.0,
+      "sales_variation_abs_usd": 1000000,
+      "margin_drop_pts": 5.0,
+      "channel_gap_pts": 20.0,
+      "segment_deviation_pts": 10.0
+    },
+    "rule_counts": {
+      "R1_margin_alert": {
+        "flagged": 14,
+        "reported": 5
+      },
+      "R2_sales_variation": {
+        "flagged": 3,
+        "reported": 3
+      },
+      "R3_like_for_like_yoy": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R4_channel_gap": {
+        "flagged": 0,
+        "reported": 0
+      },
+      "R5_segment_outlier": {
+        "flagged": 0,
+        "reported": 0
+      }
+    }
+  },
+  "kpis": {
+    "sales": {
+      "value": 56469130.0,
+      "display": "$56.47M"
+    },
+    "cost": {
+      "value": 56977169.0,
+      "display": "$56.98M"
+    },
+    "profit": {
+      "value": -508033.0,
+      "display": "-$508K"
+    },
+    "profit_margin_pct": {
+      "value": -0.9,
+      "display": "-0.9%"
+    }
+  },
+  "breakdown": {},
+  "yearly": [
+    {
+      "year": 2017,
+      "months_covered": 4,
+      "complete_year": false,
+      "sales": {
+        "value": 7395349.0,
+        "display": "$7.40M"
+      },
+      "profit": {
+        "value": 268633.0,
+        "display": "$269K"
+      },
+      "margin_pct": {
+        "value": 3.6,
+        "display": "3.6%"
+      }
+    },
+    {
+      "year": 2018,
+      "months_covered": 11,
+      "complete_year": false,
+      "sales": {
+        "value": 18655087.0,
+        "display": "$18.66M"
+      },
+      "profit": {
+        "value": -247380.0,
+        "display": "-$247K"
+      },
+      "margin_pct": {
+        "value": -1.3,
+        "display": "-1.3%"
+      }
+    },
+    {
+      "year": 2019,
+      "months_covered": 12,
+      "complete_year": true,
+      "sales": {
+        "value": 20557650.0,
+        "display": "$20.56M"
+      },
+      "profit": {
+        "value": -380474.0,
+        "display": "-$380K"
+      },
+      "margin_pct": {
+        "value": -1.9,
+        "display": "-1.9%"
+      }
+    },
+    {
+      "year": 2020,
+      "months_covered": 6,
+      "complete_year": false,
+      "sales": {
+        "value": 9861044.0,
+        "display": "$9.86M"
+      },
+      "profit": {
+        "value": -148812.0,
+        "display": "-$149K"
+      },
+      "margin_pct": {
+        "value": -1.5,
+        "display": "-1.5%"
+      }
+    }
+  ],
+  "anomalies": [
+    {
+      "id": "A01",
+      "rule": "R1_margin_alert",
+      "direction": "negative",
+      "period": "2018-06",
+      "what": "Monthly profit was negative.",
+      "metrics": {
+        "sales": {
+          "value": 849119.0,
+          "display": "$849K"
+        },
+        "profit": {
+          "value": -620041.0,
+          "display": "-$620K"
+        },
+        "margin_pct": {
+          "value": -73.0,
+          "display": "-73.0%"
+        },
+        "negative_profit": true
+      },
+      "contributors": {
+        "weakest_segments_in_month": {}
+      }
+    },
+    {
+      "id": "A02",
+      "rule": "R1_margin_alert",
+      "direction": "negative",
+      "period": "2018-07",
+      "what": "Monthly profit was negative.",
+      "metrics": {
+        "sales": {
+          "value": 1677087.0,
+          "display": "$1.68M"
+        },
+        "profit": {
+          "value": -14019.0,
+          "display": "-$14K"
+        },
+        "margin_pct": {
+          "value": -0.8,
+          "display": "-0.8%"
+        },
+        "negative_profit": true,
+        "baseline_margin_pct": {
+          "value": -14.0,
+          "display": "-14.0%"
+        },
+        "margin_drop_pts": {
+          "value": -13.2,
+          "display": "-13.2 pts"
+        },
+        "profit_vs_baseline": {
+          "value": 221219.18,
+          "display": "$221K"
+        }
+      },
+      "contributors": {
+        "weakest_segments_in_month": {}
+      }
+    },
+    {
+      "id": "A03",
+      "rule": "R1_margin_alert",
+      "direction": "negative",
+      "period": "2019-07",
+      "what": "Monthly profit was negative.",
+      "metrics": {
+        "sales": {
+          "value": 1623416.0,
+          "display": "$1.62M"
+        },
+        "profit": {
+          "value": -148610.0,
+          "display": "-$149K"
+        },
+        "margin_pct": {
+          "value": -9.2,
+          "display": "-9.2%"
+        },
+        "negative_profit": true,
+        "baseline_margin_pct": {
+          "value": 1.9,
+          "display": "1.9%"
+        },
+        "margin_drop_pts": {
+          "value": 11.1,
+          "display": "11.1 pts"
+        },
+        "profit_vs_baseline": {
+          "value": -179415.8,
+          "display": "-$179K"
+        }
+      },
+      "contributors": {
+        "weakest_segments_in_month": {}
+      }
+    },
+    {
+      "id": "A04",
+      "rule": "R1_margin_alert",
+      "direction": "negative",
+      "period": "2019-09",
+      "what": "Monthly profit was negative.",
+      "metrics": {
+        "sales": {
+          "value": 2131589.0,
+          "display": "$2.13M"
+        },
+        "profit": {
+          "value": -245131.0,
+          "display": "-$245K"
+        },
+        "margin_pct": {
+          "value": -11.5,
+          "display": "-11.5%"
+        },
+        "negative_profit": true,
+        "baseline_margin_pct": {
+          "value": -4.6,
+          "display": "-4.6%"
+        },
+        "margin_drop_pts": {
+          "value": 6.9,
+          "display": "6.9 pts"
+        },
+        "profit_vs_baseline": {
+          "value": -146476.19,
+          "display": "-$146K"
+        }
+      },
+      "contributors": {
+        "weakest_segments_in_month": {}
+      }
+    },
+    {
+      "id": "A05",
+      "rule": "R1_margin_alert",
+      "direction": "negative",
+      "period": "2019-11",
+      "what": "Monthly profit was negative.",
+      "metrics": {
+        "sales": {
+          "value": 1875251.0,
+          "display": "$1.88M"
+        },
+        "profit": {
+          "value": -9121.0,
+          "display": "-$9K"
+        },
+        "margin_pct": {
+          "value": -0.5,
+          "display": "-0.5%"
+        },
+        "negative_profit": true,
+        "baseline_margin_pct": {
+          "value": -6.7,
+          "display": "-6.7%"
+        },
+        "margin_drop_pts": {
+          "value": -6.3,
+          "display": "-6.3 pts"
+        },
+        "profit_vs_baseline": {
+          "value": 117427.37,
+          "display": "$117K"
+        }
+      },
+      "contributors": {
+        "weakest_segments_in_month": {}
+      }
+    },
+    {
+      "id": "A06",
+      "rule": "R2_sales_variation",
+      "direction": "positive",
+      "period": "2018-02",
+      "what": "Month-over-month sales change versus 2018-01.",
+      "metrics": {
+        "sales": {
+          "value": 3190315.0,
+          "display": "$3.19M"
+        },
+        "previous_sales": {
+          "value": 687178.0,
+          "display": "$687K"
+        },
+        "sales_change": {
+          "value": 2503137.0,
+          "display": "$2.50M"
+        },
+        "sales_change_pct": {
+          "value": 364.3,
+          "display": "364.3%"
+        },
+        "profit": {
+          "value": 111225.0,
+          "display": "$111K"
+        },
+        "margin_pct": {
+          "value": 3.5,
+          "display": "3.5%"
+        }
+      },
+      "contributors": {
+        "largest_changes_by_segment": {}
+      }
+    },
+    {
+      "id": "A07",
+      "rule": "R2_sales_variation",
+      "direction": "positive",
+      "period": "2018-05",
+      "what": "Month-over-month sales change versus 2018-04.",
+      "metrics": {
+        "sales": {
+          "value": 2082726.0,
+          "display": "$2.08M"
+        },
+        "previous_sales": {
+          "value": 813847.0,
+          "display": "$814K"
+        },
+        "sales_change": {
+          "value": 1268879.0,
+          "display": "$1.27M"
+        },
+        "sales_change_pct": {
+          "value": 155.9,
+          "display": "155.9%"
+        },
+        "profit": {
+          "value": 71062.0,
+          "display": "$71K"
+        },
+        "margin_pct": {
+          "value": 3.4,
+          "display": "3.4%"
+        }
+      },
+      "contributors": {
+        "largest_changes_by_segment": {}
+      }
+    },
+    {
+      "id": "A08",
+      "rule": "R2_sales_variation",
+      "direction": "negative",
+      "period": "2018-06",
+      "what": "Month-over-month sales change versus 2018-05.",
+      "metrics": {
+        "sales": {
+          "value": 849119.0,
+          "display": "$849K"
+        },
+        "previous_sales": {
+          "value": 2082726.0,
+          "display": "$2.08M"
+        },
+        "sales_change": {
+          "value": -1233607.0,
+          "display": "-$1.23M"
+        },
+        "sales_change_pct": {
+          "value": -59.2,
+          "display": "-59.2%"
+        },
+        "profit": {
+          "value": -620041.0,
+          "display": "-$620K"
+        },
+        "margin_pct": {
+          "value": -73.0,
+          "display": "-73.0%"
+        }
+      },
+      "contributors": {
+        "largest_changes_by_segment": {}
+      }
+    }
+  ],
+  "limitations": [
+    "The data show where and when changes happened, not why. Contributing segments are not confirmed causes.",
+    "Order counts are not additive across rows and are excluded from this analysis.",
+    "The dataset contains no sales targets, so no target-gap analysis is possible.",
+    "Calendar years with less than 12 months of data: 2017 (4 months), 2018 (11 months), 2020 (6 months). Year-over-year comparisons use like-for-like windows only."
+  ]
+}

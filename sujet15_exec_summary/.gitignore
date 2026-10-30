@@ -1,0 +1,6 @@
+.env
+__pycache__/
+*.pyc
+outputs/validation_log.csv
+outputs/*_report.md
+outputs/*_input.json

@@ -1,0 +1,16 @@
+{
+  "status": "no_data",
+  "meta": {
+    "report": "AdventureWorks Sales (Power BI export, monthly)",
+    "currency": "USD",
+    "date_basis": "Order Date (selector 'By Order Date' at export time; verify if re-exporting)",
+    "scope": {
+      "channel": null,
+      "group": null,
+      "category": "Helmets",
+      "start": null,
+      "end": null
+    }
+  },
+  "reason": "Unknown Category 'Helmets'. Available: ['Accessories', 'Bikes', 'Clothing', 'Components']"
+}
