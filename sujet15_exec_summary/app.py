@@ -51,13 +51,129 @@ def terminal_error(message):
     print(f"[ERREUR] {message}", flush=True)
 
 
+def severity_style(value):
+    styles = {
+        "critical": ("#fde2e1", "#b42318"),
+        "high": ("#fff0d6", "#9a6700"),
+        "moderate": ("#e6f4ea", "#137333"),
+    }
+    background, foreground = styles.get(
+        str(value).lower(),
+        ("#eef2f6", "#486581")
+    )
+    return (
+        f"background-color: {background}; "
+        f"color: {foreground}; "
+        "font-weight: 700; "
+        "text-transform: uppercase;"
+    )
+
+
 # ================================================================
 # STREAMLIT CONFIGURATION
 # ================================================================
 
 st.set_page_config(
     page_title="Executive Summary & Anomalies",
-    layout="wide"
+    page_icon="📊",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+st.markdown(
+    """
+    <style>
+    :root {
+        --navy: #102a43;
+        --blue: #1976d2;
+        --teal: #00897b;
+        --muted: #627d98;
+        --surface: #ffffff;
+        --border: #d9e2ec;
+    }
+
+    .stApp {
+        background: #f5f7fb;
+    }
+
+    [data-testid="stHeader"] {
+        background: rgba(245, 247, 251, 0.92);
+    }
+
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #102a43 0%, #163b5c 100%);
+    }
+
+    [data-testid="stSidebar"] * {
+        color: #f0f4f8;
+    }
+
+    [data-testid="stSidebar"] [data-baseweb="select"] > div,
+    [data-testid="stSidebar"] [data-baseweb="input"] > div {
+        background: #ffffff;
+        color: #102a43;
+    }
+
+    [data-testid="stSidebar"] [data-baseweb="select"] span,
+    [data-testid="stSidebar"] [data-baseweb="input"] input {
+        color: #102a43;
+    }
+
+    h1 {
+        color: var(--navy);
+        letter-spacing: -0.03em;
+    }
+
+    h2, h3 {
+        color: var(--navy);
+    }
+
+    [data-testid="stMetric"] {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px 18px;
+        box-shadow: 0 3px 12px rgba(16, 42, 67, 0.06);
+    }
+
+    [data-testid="stMetricLabel"] {
+        color: var(--muted);
+    }
+
+    [data-testid="stMetricValue"] {
+        color: var(--navy);
+    }
+
+    [data-testid="stPlotlyChart"],
+    [data-testid="stDataFrame"],
+    [data-testid="stExpander"] {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: 0 3px 12px rgba(16, 42, 67, 0.04);
+    }
+
+    [data-testid="stPlotlyChart"] {
+        padding: 8px;
+    }
+
+    .dashboard-kicker {
+        color: var(--blue);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: -0.5rem;
+    }
+
+    .scope-caption {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-bottom: 1.2rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
 )
 
 
@@ -153,14 +269,20 @@ terminal_success(
 # DASHBOARD HEADER
 # ================================================================
 
+st.markdown(
+    '<div class="dashboard-kicker">POWER BI · GENERATIVE BI</div>',
+    unsafe_allow_html=True
+)
+
 st.title(
     "Executive Summary & Anomalies - AdventureWorks Sales"
 )
 
-st.caption(
-    f"Source : modèle sémantique Power BI · "
-    f"{len(df):,} combinaisons mensuelles · "
-    f"{df['date'].min():%Y-%m} à {df['date'].max():%Y-%m}"
+st.markdown(
+    f'<div class="scope-caption">Source : modèle sémantique Power BI · '
+    f'{len(df):,} combinaisons mensuelles · '
+    f"{df['date'].min():%Y-%m} à {df['date'].max():%Y-%m}</div>",
+    unsafe_allow_html=True
 )
 
 
@@ -311,7 +433,8 @@ try:
                 f"   - {anomaly['id']} | "
                 f"{anomaly['rule']} | "
                 f"{anomaly['period']} | "
-                f"{anomaly['direction']}",
+                f"{anomaly['direction']} | "
+                f"{anomaly.get('metrics', {}).get('severity', 'moderate')}",
                 flush=True
             )
 
@@ -498,8 +621,12 @@ with left:
             for a in payload["anomalies"]
         ]
 
+        anomalies_frame = pd.DataFrame(rows)
         st.dataframe(
-            pd.DataFrame(rows),
+            anomalies_frame.style.map(
+                severity_style,
+                subset=["severity"]
+            ),
             width="stretch",
             hide_index=True
         )

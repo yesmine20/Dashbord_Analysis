@@ -9,9 +9,10 @@ from typing import Any
 import pandas as pd
 from dotenv import load_dotenv
 
+from . import config
 from .semantic_model import validate_query_contract
 
-load_dotenv()
+load_dotenv(config.ROOT / ".env", override=True)
 _NETFX_READY = False
 
 
@@ -330,7 +331,6 @@ def _to_number(s: pd.Series) -> pd.Series:
 
 def _load_snapshot_data() -> pd.DataFrame:
     """Load certified snapshot from data/export_kpi_mensuel.csv if live engine is not connected."""
-    from . import config
     snapshot_path = config.ROOT / "data" / "export_kpi_mensuel.csv"
     if not snapshot_path.is_file():
         raise PowerBIConnectionError(
