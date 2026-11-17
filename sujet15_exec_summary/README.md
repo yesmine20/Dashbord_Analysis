@@ -1,150 +1,414 @@
-# Sujet 15 - Résumé exécutif et explication des anomalies (Generative BI)
+# Sujet 15 — Executive Summary & Anomalies
 
-À partir des KPI d'un rapport Power BI (**AdventureWorks Sales**), le projet produit un résumé exécutif et explique les
-anomalies détectées, avec une **étape de validation humaine**.
+Projet de **Generative BI** construit autour du modèle sémantique Power BI
+**AdventureWorks Sales**. L'application transforme des mesures Power BI en
+indicateurs, détecte les anomalies avec des règles déterministes, demande à un
+LLM de rédiger un résumé et impose une validation humaine avant diffusion.
 
-Principe : **le code calcule, le LLM raconte, l'humain valide.**
+> **Principe : le code calcule, le LLM raconte, l'humain valide.**
 
-1. `src/detect.py` calcule les KPI et détecte les anomalies (règles déterministes, sans LLM) et produit un JSON.
-2. Le LLM reçoit **uniquement** ce JSON et rédige le texte. Il ne calcule rien et ne donne que des « facteurs possibles ».
-3. `src/check_numbers.py` vérifie que chaque chiffre du texte existe dans le JSON.
-4. Un humain relit et valide (`src/validate.py` ou l'application Streamlit).
+## 1. Objectifs
 
-## Contenu
+Le projet répond aux besoins suivants :
 
+- exploiter les mesures et relations du modèle Power BI comme source de vérité ;
+- filtrer l'analyse par canal, groupe géographique, catégorie et période ;
+- calculer les KPI Sales, Cost, Profit et marge ;
+- détecter automatiquement les variations et écarts significatifs ;
+- transmettre au LLM uniquement un JSON analytique contrôlé ;
+- vérifier les nombres présents dans le texte généré ;
+- produire un rapport Markdown ou PDF ;
+- faire valider le rapport par un relecteur humain ;
+- conserver les scénarios, sorties et résultats de recette.
+
+Le projet n'essaie pas de déterminer une cause commerciale certaine. Il indique
+où et quand une variation est observée, puis présente les segments contributeurs
+comme des **facteurs possibles**.
+
+## 2. Fonctionnement global
+
+```text
+PBIP / modèle Power BI
+        |
+        v
+Catalogue TMDL + requête DAX
+        |
+        v
+Résultats mensuels par segment
+        |
+        v
+Filtres et KPI
+        |
+        v
+Détection déterministe des anomalies
+        |
+        v
+Payload JSON contrôlé
+        |
+        v
+Résumé et explication par LLM
+        |
+        v
+Contrôle des nombres
+        |
+        v
+Rapport Markdown / PDF
+        |
+        v
+Validation humaine et journal d'audit
 ```
-app.py                       application Streamlit (KPI, graphiques, texte IA, validation, export Markdown)
-AdventureWorks Sales.SemanticModel/definition/*.tmdl  métadonnées du modèle sémantique (source des mesures et champs DAX)
-src/                         load_data, detect, prompts, llm_client, mock_llm, check_numbers, report, validate, pipeline
-scenarios/scenarios.json     20 scénarios (dont 2 sans anomalie et 3 hors données)
-scenarios/ground_truth.csv   matrice de recette (vraies valeurs + colonnes à remplir)
-outputs/examples/            résultats de démonstration des 20 scénarios (générés en mode "mock")
-tests/                       14 tests automatiques
-docs/                        architecture, règles de détection, modèle de note pédagogique, répartition A/B, inventaire des visuels Power BI
+
+Le LLM ne reçoit pas directement le fichier PBIP ni le CSV. Il reçoit seulement
+le payload construit par `src/detect.py`.
+
+## 3. Structure du dépôt
+
+```text
+app.py                              Interface Streamlit
+requirements.txt                    Dépendances Python
+AdventureWorks Sales.pbip           Projet Power BI Desktop (PBIP)
+AdventureWorks Sales.Report/        Définition du rapport et des visuels
+AdventureWorks Sales.SemanticModel/ Modèle sémantique TMDL et relations
+
+src/
+  config.py                         Chemins, mesures, devise et seuils
+  semantic_model.py                 Catalogue et validation PBIP/TMDL
+  powerbi.py                        Requête DAX, ADOMD.NET et API REST
+  load_data.py                      Chargement, normalisation et filtres
+  detect.py                         KPI et détection déterministe
+  prompts.py                        Prompts système et prompts de tâches
+  llm_client.py                     Adaptateurs OpenAI, Azure, Anthropic, Groq
+  check_numbers.py                  Contrôle des chiffres générés
+  report.py                         Génération du rapport Markdown
+  pdf_report.py                     Conversion Markdown vers PDF
+  validate.py                       Checklist et journal de validation
+  pipeline.py                       Exécution en ligne de commande
+
+data/                               Données/export de référence
+scenarios/                          Scénarios et matrice de recette
+outputs/                            Rapports et payloads générés
+tests/                              Tests automatisés
+docs/                               Documentation technique et pédagogique
 ```
 
-## Installation (Windows, PowerShell)
+Les dossiers `.pbi/` sont des fichiers locaux générés par Power BI Desktop
+(cache, paramètres de session, requêtes de l'éditeur) et sont ignorés par Git.
+
+## 4. Installation sous Windows
+
+Depuis le dossier contenant `app.py` :
 
 ```powershell
-cd sujet15_exec_summary
 python -m venv .venv
 .venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### Power BI Desktop live query (first integration step)
+Python **3.10 ou plus récent** est requis.
 
-Open `AdventureWorks Sales.pbip` in Power BI Desktop and keep the model running.
-Add the `POWERBI_ADOMD_DATA_SOURCE`,
-`POWERBI_ADOMD_CATALOG`, and (if ADOMD.NET is not on the .NET assembly search
-path) `POWERBI_ADOMD_DLL` entries from `.env.example` to the existing `.env`,
-using the values for that local Desktop instance. Do not replace an existing
-`.env`, since it may contain LLM provider credentials. The
-server port and catalog ID can change between Desktop sessions. Start the app
-and use **Power BI Desktop — connexion réelle → Interroger le modèle Power BI**
-to execute a read-only DAX query and display monthly sales and orders.
+Les dépendances principales sont :
 
-The Streamlit app and command-line pipeline both query the semantic model.
-The DAX query groups the semantic measures by month, product category, sales
-territory group, and sales channel, so the Python anomaly rules consume the
-same measure definitions as the Power BI report. The summary-analysis fact
-grain does not sum Orders; Orders is a distinct-count measure and is retained
-for reference only.
-Python 3.10 ou plus récent est nécessaire.
+- `pandas` et `numpy` pour la préparation et l'analyse ;
+- `streamlit` pour l'interface ;
+- `plotly` pour les graphiques ;
+- `reportlab` pour les PDF ;
+- `pythonnet` sous Windows pour ADOMD.NET ;
+- `openai` pour OpenAI, Azure OpenAI et Groq ;
+- `anthropic` pour Anthropic.
 
-## Démarrage rapide (sans clé API)
+## 5. Configuration des données Power BI
 
-```powershell
-python -m unittest discover -s tests -v          # 14 tests
-python -m src.pipeline --scenario S02            # un scénario -> outputs/S02_input.json et S02_report.md
-python -m src.pipeline --all                     # les 20 scénarios
-python -m src.pipeline --channel Reseller --start 2018-01 --end 2018-12
-streamlit run app.py                             # interface
+### 5.1 Modèle local Power BI Desktop
+
+1. Ouvrir `AdventureWorks Sales.pbip` avec Power BI Desktop.
+2. Garder le modèle ouvert et chargé.
+3. Récupérer le serveur local et le catalogue de la session Power BI.
+4. Ajouter ces variables dans un fichier `.env` à la racine :
+
+```dotenv
+POWERBI_EXECUTION_MODE=local
+POWERBI_ADOMD_DATA_SOURCE=<serveur-local-power-bi>
+POWERBI_ADOMD_CATALOG=<catalogue-local-power-bi>
+POWERBI_ADOMD_DLL=<chemin-optionnel-vers-Microsoft.AnalysisServices.AdomdClient.dll>
 ```
 
-Par défaut le fournisseur est `mock` : ce n'est **pas** un modèle de langage, mais un gabarit qui recopie les chiffres du
-JSON. Il permet de tester toute la chaîne sans clé. Pour juger la qualité réelle des textes, utilisez un vrai LLM.
+Le port et l'identifiant du catalogue peuvent changer à chaque session Power BI.
+Ne remplacez pas un `.env` existant : il peut déjà contenir des clés LLM.
 
-## Utiliser un vrai LLM
+Sous Windows, `pythonnet` charge l'assembly ADOMD.NET. Si elle n'est pas
+accessible dans le chemin .NET, renseigner explicitement `POWERBI_ADOMD_DLL`.
 
-1. Créez ou modifiez le fichier `.env` à la racine du projet.
-2. Renseignez `LLM_PROVIDER` (`openai`, `azure`, `anthropic` ou `groq`), `LLM_MODEL` (nom du modèle, ou du déploiement pour Azure)
-   et la clé correspondante. Pour Groq, créez une clé sur [console.groq.com/keys](https://console.groq.com/keys), renseignez `GROQ_API_KEY`,
-   puis choisissez un identifiant de modèle actuellement disponible dans votre compte Groq.
-3. Lancez `python -m src.pipeline --scenario S01 --provider groq`, ou `streamlit run app.py` puis choisissez `groq` dans la liste.
+### 5.2 Power BI Service / Fabric
 
-Le paramètre `--provider groq` force Groq pour cette exécution. Sans paramètre explicite, le pipeline utilise `LLM_PROVIDER` du fichier `.env`.
-L'application sélectionne aussi ce fournisseur par défaut. La réponse « aucune anomalie à expliquer » est déterministe et ne passe pas par un LLM.
+Le module `src/powerbi.py` peut aussi utiliser l'endpoint REST
+`executeQueries` :
 
-Exemple de configuration Groq dans `.env` :
+```dotenv
+POWERBI_EXECUTION_MODE=cloud
+POWERBI_TENANT_ID=<tenant-id>
+POWERBI_CLIENT_ID=<application-id>
+POWERBI_CLIENT_SECRET=<secret>
+POWERBI_DATASET_ID=<dataset-id>
+```
+
+Le principal de service doit avoir les droits Azure/Power BI nécessaires.
+Les secrets ne doivent jamais être commités, copiés dans le README ou ajoutés
+à un fichier suivi par Git.
+
+### 5.3 Contrat DAX et modèle TMDL
+
+La requête standard regroupe les mesures par :
+
+- `'Date'[Month]` ;
+- `Product[Category]` ;
+- `'Sales Territory'[Group]` ;
+- `'Sales Order'[Channel]`.
+
+Elle renvoie les mesures `[Sales]`, `[Cost]`, `[Profit]` et `[Orders]`.
+`src/semantic_model.py` lit les fichiers TMDL, catalogue les tables, colonnes,
+mesures et relations, puis permet de vérifier que la requête correspond au
+modèle.
+
+La date utilisée est la relation active :
+`Sales[OrderDateKey] -> Date[DateKey]`.
+
+## 6. Configuration d'un fournisseur LLM
+
+Le fournisseur est choisi avec `LLM_PROVIDER`. Les adaptateurs disponibles dans
+`src/llm_client.py` sont `openai`, `azure`, `anthropic` et `groq`.
+
+### OpenAI
+
+```dotenv
+LLM_PROVIDER=openai
+LLM_MODEL=<nom-du-modele>
+OPENAI_API_KEY=<cle>
+```
+
+### Azure OpenAI
+
+```dotenv
+LLM_PROVIDER=azure
+LLM_MODEL=<nom-du-deploiement>
+AZURE_OPENAI_API_KEY=<cle>
+AZURE_OPENAI_ENDPOINT=https://<ressource>.openai.azure.com/
+AZURE_OPENAI_API_VERSION=2024-06-01
+```
+
+### Anthropic
+
+```dotenv
+LLM_PROVIDER=anthropic
+LLM_MODEL=<nom-du-modele>
+ANTHROPIC_API_KEY=<cle>
+```
+
+### Groq
 
 ```dotenv
 LLM_PROVIDER=groq
-LLM_MODEL=openai/gpt-oss-120b
-GROQ_API_KEY=colle_ta_cle_ici
+LLM_MODEL=<modele-disponible-dans-le-compte>
+GROQ_API_KEY=<cle>
 ```
 
-Le nom du modèle proposé est un exemple : vérifie dans la console Groq les modèles disponibles pour ta clé. Ne partage jamais
-ta clé et ne la colle pas dans le code ou dans un fichier suivi par Git.
+Le fournisseur par défaut est lu dans `LLM_PROVIDER`. Si aucune variable n'est
+définie, le code utilise la valeur `mock` par défaut, mais le fournisseur mock
+doit être implémenté/configuré avant une exécution complète de génération.
+Pour une démonstration reproductible sans API, utiliser les sorties déjà
+présentes dans `outputs/examples/` ou ajouter un adaptateur mock.
 
-Les prompts sont dans `src/prompts.py` (en anglais, comme demandé). Le prompt système impose : n'utiliser que le JSON,
-recopier les chiffres « display », répondre `No data available` sinon, ne jamais présenter une cause comme un fait.
+## 7. Lancer l'application Streamlit
 
-## Règles de détection
+```powershell
+streamlit run app.py
+```
 
-| Règle | Détecte |
+L'interface permet de :
+
+1. charger les données du modèle Power BI ;
+2. choisir le périmètre d'analyse ;
+3. afficher les KPI et les graphiques Plotly ;
+4. consulter les anomalies et le JSON transmis au LLM ;
+5. générer le résumé exécutif et l'explication ;
+6. vérifier les nombres ;
+7. télécharger le rapport PDF ;
+8. enregistrer la décision humaine.
+
+Si la connexion Power BI échoue, l'application affiche l'erreur technique et
+les variables d'environnement nécessaires au lieu de produire un rapport avec
+des données silencieusement incomplètes.
+
+## 8. Lancer le pipeline CLI
+
+```powershell
+# Scénario précis
+python -m src.pipeline --scenario S02
+
+# Tous les scénarios
+python -m src.pipeline --all
+
+# Périmètre personnalisé
+python -m src.pipeline --channel Reseller --start 2018-01 --end 2018-12
+
+# Fournisseur explicite
+python -m src.pipeline --scenario S02 --provider groq
+
+# Dossier de sortie personnalisé
+python -m src.pipeline --scenario S02 --out-dir outputs/test
+```
+
+Pour chaque exécution, le pipeline :
+
+1. charge le modèle sémantique ;
+2. exécute la requête DAX ;
+3. sélectionne les scénarios ou filtres demandés ;
+4. construit le payload d'analyse ;
+5. génère le résumé et l'explication ;
+6. vérifie les chiffres ;
+7. écrit `<nom>_input.json` et `<nom>_report.md`.
+
+## 9. Règles de détection
+
+Les règles sont exécutées sans LLM dans `src/detect.py`. Les seuils sont
+centralisés dans `src/config.py` et documentés dans `docs/rules.md`.
+
+| Règle | Fonction |
 |---|---|
-| R1 | mois à marge négative ou très inférieure à la base des 3 mois précédents |
-| R2 | variation de ventes d'un mois à l'autre (≥ 15 % **et** ≥ 1 M$, hausses incluses) |
-| R3 | 6 derniers mois vs mêmes 6 mois un an avant (comparaison « à périodes égales ») |
-| R4 | écart de marge entre canaux (Internet / Reseller) |
-| R5 | catégorie ou région dont la marge s'écarte fortement de celle du périmètre |
+| R1 | Alerte de marge négative ou nettement inférieure à la base des 3 mois précédents |
+| R2 | Variation mensuelle des ventes au-dessus de 15 % et de 1 M$ |
+| R3 | Comparaison des 6 derniers mois avec les mêmes 6 mois de l'année précédente |
+| R4 | Écart de marge d'au moins 20 points entre les canaux |
+| R5 | Catégorie ou groupe dont la marge s'écarte d'au moins 10 points de la marge globale |
 
-Détails et seuils : `docs/rules.md` et `src/config.py`.
+Précisions importantes :
 
-## Scénarios et matrice de recette
+- R1 ignore les mois dont les ventes sont inférieures à 100 000 $ ;
+- R5 exige au moins 1 M$ de ventes pour un segment ;
+- seules les anomalies les plus importantes par règle sont rapportées ;
+- un score Z est calculé lorsqu'une base historique et un écart-type utilisable
+  sont disponibles ;
+- `Orders` est conservé comme mesure de référence, mais n'est pas additionné
+  dans l'analyse car un décompte de commandes n'est pas additif entre lignes.
 
-- `python -m src.build_ground_truth` régénère `scenarios/ground_truth.csv` (séparateur `;`, s'ouvre directement dans Excel).
-- Pour chaque scénario : lancez le LLM, collez la réponse, puis notez (0/1) l'exactitude des chiffres, les anomalies
-  couvertes, l'absence de cause inventée et le ton.
-- Les scénarios S12-S13 (aucune anomalie) testent les faux positifs. S15-S17 (région, année ou catégorie inexistantes)
-  doivent répondre exactement `No data available`.
-- Pour arriver à 20 scénarios « réels » comme dans le sujet, ajoutez-en dans `scenarios/scenarios.json` puis relancez
-  la commande ci-dessus.
+## 10. Payload et génération du texte
 
-## Validation humaine
+`build_payload()` retourne un objet JSON avec notamment :
+
+- `status` : `ok` ou `no_data` ;
+- `meta` : périmètre, période, devise, seuils et compteurs ;
+- `kpis` : ventes, coût, profit et marge ;
+- `breakdown` : répartition par canal, catégorie et groupe ;
+- `yearly` : comparaison annuelle et nombre de mois disponibles ;
+- `anomalies` : anomalies détectées et contributeurs ;
+- `limitations` : limites à rappeler dans le rapport.
+
+Les prompts dans `src/prompts.py` demandent au LLM :
+
+- de n'utiliser que le JSON fourni ;
+- de recopier les nombres affichés ;
+- de ne pas présenter une cause comme un fait ;
+- de distinguer observations et facteurs possibles ;
+- de répondre `No data available` si le périmètre ne contient aucune donnée.
+
+## 11. Contrôle anti-hallucination
+
+`src/check_numbers.py` extrait les nombres du texte produit et vérifie leur
+présence dans le payload JSON. Le contrôle détecte notamment :
+
+- un montant inventé ;
+- un pourcentage absent des données ;
+- une valeur modifiée ou arrondie de manière inattendue.
+
+Ce garde-fou ne prouve pas que le texte est parfaitement pertinent : il vérifie
+les chiffres, pas toute la logique métier ni toutes les formulations.
+
+## 12. Validation humaine et exports
+
+Pour valider un rapport généré :
 
 ```powershell
 python -m src.validate outputs/S02_report.md --reviewer "Votre nom"
 ```
-Une checklist de 4 questions est posée. Le statut du rapport passe de `AI DRAFT` à `VALIDATED` ou `NEEDS REVISION`, et la
-décision est ajoutée à `outputs/validation_log.csv`. L'application Streamlit propose la même checklist.
 
-## Modèle Power BI interrogé
+La checklist vérifie :
 
-La requête utilise `'Date'[Month]`, `Product[Category]`, `'Sales Territory'[Group]`
-et `'Sales Order'[Channel]`, avec les mesures `[Sales]`, `[Cost]`, `[Profit]` et
-`[Orders]`. Ces noms doivent correspondre aux définitions sous
-`AdventureWorks Sales.SemanticModel/definition/tables/` et aux relations dans
-`relationships.tmdl`. La date utilisée est la relation active
-`Sales[OrderDateKey]` vers `Date[DateKey]` (Order Date). Si le modèle change,
-vérifiez les définitions TMDL avant de modifier `ANALYSIS_DAX` dans
-`src/powerbi.py`.
+1. l'exactitude des chiffres ;
+2. l'absence de causes présentées comme des faits ;
+3. la clarté du périmètre ;
+4. l'adaptation à un public dirigeant.
 
-## Limites connues (à écrire dans la note pédagogique)
+La décision devient `VALIDATED` ou `NEEDS REVISION`. Elle est ajoutée à
+`outputs/validation_log.csv`. L'application Streamlit propose le même parcours
+et permet de télécharger le rapport au format PDF.
 
-- **Pas d'objectifs** dans ce jeu de données : pas d'écart « réel vs cible ».
-- **Années partielles** : déterminées à partir des dates réellement renvoyées par le modèle. Les comparaisons annuelles se font à périodes égales.
-- **`Orders` n'est pas additif** entre lignes : exclu de l'analyse.
-- **Seuils** choisis pour démarrer : à justifier ou ajuster. Les ventes mensuelles sont très irrégulières, d'où le double seuil.
-- **« 0 % d'hallucination » ne se décrète pas** : le prompt et le contrôle des chiffres réduisent le risque, la validation
-  humaine reste nécessaire. Le contrôle vérifie les chiffres, pas la justesse de l'interprétation.
-- **Vérification à effectuer** : Streamlit et les fournisseurs LLM réels n'ont pas été exécutés ici. Le dépôt contient 14 tests automatisés; leur exécution nécessite Python 3.10+ et les dépendances installées.
+## 13. Scénarios et recette
 
-Dans l'application, le bouton **Download report (PDF)** télécharge le rapport au format PDF. Après **Record decision**, une copie du rapport validé est également enregistrée dans `outputs/` et le journal de validation référence ce fichier PDF.
+`scenarios/scenarios.json` contient les périmètres de test. La matrice
+`scenarios/ground_truth.csv` peut être régénérée avec :
 
+```powershell
+python -m src.build_ground_truth
+```
 
-## État du livrable pédagogique
+Les scénarios couvrent notamment :
 
-La note finalisée est dans `docs/note_pedagogique.md`. Les exemples sous `outputs/examples/` sont générés en mode `mock` (hors ligne) et illustrent le parcours; ils ne mesurent pas la qualité d'un LLM. La matrice `scenarios/ground_truth.csv` reste à renseigner avec les réponses d'un vrai modèle avant de conclure sur l'exactitude et le ton.
+- la vue globale ;
+- les canaux, régions et catégories ;
+- des périodes spécifiques ;
+- des périmètres sans anomalie ;
+- des filtres inconnus ou sans données.
 
+Les fichiers `outputs/examples/` sont des exemples de rapports. Avant de
+conclure sur la qualité d'un LLM, il faut compléter la matrice avec des réponses
+réelles et évaluer les chiffres, la couverture des anomalies, l'absence de
+causes inventées et le ton.
+
+## 14. Tests
+
+Commande principale :
+
+```powershell
+python -m unittest discover -s tests -v
+```
+
+Les tests couvrent notamment :
+
+- la structure du projet ;
+- le catalogue TMDL et les contrats DAX ;
+- la génération de requêtes et le push-down des filtres ;
+- la normalisation des résultats Power BI ;
+- les règles statistiques et anomalies ;
+- les filtres et scénarios sans données ;
+- le contrôle des nombres ;
+- la génération PDF ;
+- la validation du rapport.
+
+Les tests qui interrogent Power BI en direct nécessitent une instance Power BI
+Desktop ou une configuration cloud valide. Ils doivent être traités comme des
+tests d'intégration et non comme de simples tests unitaires.
+
+## 15. Documentation complémentaire
+
+- `docs/RESUME_TECHNIQUE.md` : architecture et fonctionnement détaillé ;
+- `docs/PLAN_ET_EXECUTION.md` : feuille de route et guide d'exécution ;
+- `docs/architecture.md` : architecture fonctionnelle ;
+- `docs/rules.md` : règles et seuils d'anomalie ;
+- `docs/note_pedagogique.md` : note destinée à la présentation pédagogique ;
+- `docs/plan-migration-powerbi-service.md` : préparation d'un déploiement Power BI Service ;
+- `AdventureWorks Sales.SemanticModel/definition/` : tables, mesures et relations TMDL.
+
+## 16. Limites connues
+
+- Les données viennent des mesures du modèle et dépendent de la disponibilité de
+  Power BI Desktop ou de Power BI Service.
+- Les années peuvent être partielles ; les comparaisons utilisent des fenêtres
+  comparables lorsque c'est possible.
+- Le modèle ne contient pas de cibles commerciales : aucun écart réel-versus-cible
+  n'est calculé.
+- Les seuils sont des paramètres de départ et doivent être calibrés avec le
+  métier.
+- Les segments contributeurs indiquent une corrélation descriptive, pas une
+  causalité.
+- Le contrôle numérique ne garantit pas l'absence totale d'hallucination.
+- Une validation humaine reste obligatoire avant diffusion.
