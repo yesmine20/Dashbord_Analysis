@@ -77,7 +77,7 @@ src/
   load_data.py                      Chargement, normalisation et filtres
   detect.py                         KPI et détection déterministe
   prompts.py                        Prompts système et prompts de tâches
-  llm_client.py                     Adaptateurs OpenAI, Azure, Anthropic, Groq
+  llm_client.py                     Adaptateurs Groq
   check_numbers.py                  Contrôle des chiffres générés
   report.py                         Génération du rapport Markdown
   pdf_report.py                     Conversion Markdown vers PDF
@@ -114,7 +114,7 @@ Les dépendances principales sont :
 - `plotly` pour les graphiques ;
 - `reportlab` pour les PDF ;
 - `pythonnet` sous Windows pour ADOMD.NET ;
-- `openai` pour OpenAI, Azure OpenAI et Groq ;
+- ` Groq ;
 - `anthropic` pour Anthropic.
 
 ## 5. Configuration des données Power BI
@@ -176,7 +176,7 @@ La date utilisée est la relation active :
 ## 6. Configuration d'un fournisseur LLM
 
 Le fournisseur est choisi avec `LLM_PROVIDER`. Les adaptateurs disponibles dans
-`src/llm_client.py` sont `openai`, `azure`, `anthropic` et `groq`.
+`src/llm_client.py` sont  `groq`.
 
 ### Groq
 
