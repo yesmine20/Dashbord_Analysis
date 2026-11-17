@@ -14,7 +14,7 @@ Principe : **le code calcule, le LLM raconte, l'humain valide.**
 
 ```
 app.py                       application Streamlit (KPI, graphiques, texte IA, validation, export Markdown)
-data/export_kpi_mensuel.csv  export du rapport Power BI (461 lignes, 2017-07 à 2020-06)
+AdventureWorks Sales.SemanticModel/definition/*.tmdl  métadonnées du modèle sémantique (source des mesures et champs DAX)
 src/                         load_data, detect, prompts, llm_client, mock_llm, check_numbers, report, validate, pipeline
 scenarios/scenarios.json     20 scénarios (dont 2 sans anomalie et 3 hors données)
 scenarios/ground_truth.csv   matrice de recette (vraies valeurs + colonnes à remplir)
@@ -31,6 +31,25 @@ python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
+
+### Power BI Desktop live query (first integration step)
+
+Open `AdventureWorks Sales.pbip` in Power BI Desktop and keep the model running.
+Add the `POWERBI_ADOMD_DATA_SOURCE`,
+`POWERBI_ADOMD_CATALOG`, and (if ADOMD.NET is not on the .NET assembly search
+path) `POWERBI_ADOMD_DLL` entries from `.env.example` to the existing `.env`,
+using the values for that local Desktop instance. Do not replace an existing
+`.env`, since it may contain LLM provider credentials. The
+server port and catalog ID can change between Desktop sessions. Start the app
+and use **Power BI Desktop — connexion réelle → Interroger le modèle Power BI**
+to execute a read-only DAX query and display monthly sales and orders.
+
+The Streamlit app and command-line pipeline both query the semantic model.
+The DAX query groups the semantic measures by month, product category, sales
+territory group, and sales channel, so the Python anomaly rules consume the
+same measure definitions as the Power BI report. The summary-analysis fact
+grain does not sum Orders; Orders is a distinct-count measure and is retained
+for reference only.
 Python 3.10 ou plus récent est nécessaire.
 
 ## Démarrage rapide (sans clé API)
@@ -101,16 +120,21 @@ python -m src.validate outputs/S02_report.md --reviewer "Votre nom"
 Une checklist de 4 questions est posée. Le statut du rapport passe de `AI DRAFT` à `VALIDATED` ou `NEEDS REVISION`, et la
 décision est ajoutée à `outputs/validation_log.csv`. L'application Streamlit propose la même checklist.
 
-## Mettre à jour les données
+## Modèle Power BI interrogé
 
-Réexportez le visuel Tableau depuis Power BI (mêmes colonnes : Year, Month, Category, Group, Channel, Sales, Cost, Profit,
-Profit %, Orders), remplacez `data/export_kpi_mensuel.csv`, puis mettez à jour `EXPECTED_TOTALS` dans `src/config.py`
-avec la ligne « Total » du tableau. Le pipeline affiche `Data check vs Power BI totals: OK` quand les totaux concordent.
+La requête utilise `'Date'[Month]`, `Product[Category]`, `'Sales Territory'[Group]`
+et `'Sales Order'[Channel]`, avec les mesures `[Sales]`, `[Cost]`, `[Profit]` et
+`[Orders]`. Ces noms doivent correspondre aux définitions sous
+`AdventureWorks Sales.SemanticModel/definition/tables/` et aux relations dans
+`relationships.tmdl`. La date utilisée est la relation active
+`Sales[OrderDateKey]` vers `Date[DateKey]` (Order Date). Si le modèle change,
+vérifiez les définitions TMDL avant de modifier `ANALYSIS_DAX` dans
+`src/powerbi.py`.
 
 ## Limites connues (à écrire dans la note pédagogique)
 
 - **Pas d'objectifs** dans ce jeu de données : pas d'écart « réel vs cible ».
-- **Années partielles** : 2017 (juillet-décembre) et 2020 (janvier-juin). Les comparaisons annuelles se font à périodes égales.
+- **Années partielles** : déterminées à partir des dates réellement renvoyées par le modèle. Les comparaisons annuelles se font à périodes égales.
 - **`Orders` n'est pas additif** entre lignes : exclu de l'analyse.
 - **Seuils** choisis pour démarrer : à justifier ou ajuster. Les ventes mensuelles sont très irrégulières, d'où le double seuil.
 - **« 0 % d'hallucination » ne se décrète pas** : le prompt et le contrôle des chiffres réduisent le risque, la validation

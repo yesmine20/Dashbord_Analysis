@@ -1,6 +1,7 @@
 .env
 __pycache__/
 *.pyc
+.pbi/
 outputs/validation_log.csv
 outputs/*_report.md
 outputs/*_input.json

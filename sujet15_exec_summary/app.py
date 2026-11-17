@@ -1,8 +1,11 @@
+
 """Streamlit dashboard: KPI + charts on the left, AI narrative and human validation on the right.
 
-Run:  streamlit run app.py
+Run: streamlit run app.py
 """
+
 import json
+import time
 
 import pandas as pd
 import plotly.express as px
@@ -12,117 +15,813 @@ from src import config
 from src.check_numbers import check_text
 from src.detect import build_payload
 from src.llm_client import PROVIDERS, default_provider, generate
-from src.load_data import Scope, apply_scope, load_clean, monthly, reconcile
+from src.load_data import Scope, apply_scope, load_from_powerbi, monthly
+from src.powerbi import PowerBIConnectionError
+from src.semantic_model import validate_query_contract
 from src.pdf_report import markdown_to_pdf
 from src.report import render_markdown
 from src.validate import CHECKLIST, apply_validation, log
 
-st.set_page_config(page_title="Executive Summary & Anomalies", layout="wide")
+
+# ================================================================
+# TERMINAL LOGGING
+# ================================================================
+
+def terminal_header(title):
+    print("\n" + "=" * 65, flush=True)
+    print(f"  {title}", flush=True)
+    print("=" * 65, flush=True)
 
 
-@st.cache_data
+def terminal_step(message):
+    print(f"[INFO] {message}", flush=True)
+
+
+def terminal_success(message, duration=None):
+    if duration is not None:
+        print(
+            f"[OK] {message} ({duration:.2f} secondes)",
+            flush=True
+        )
+    else:
+        print(f"[OK] {message}", flush=True)
+
+
+def terminal_error(message):
+    print(f"[ERREUR] {message}", flush=True)
+
+
+# ================================================================
+# STREAMLIT CONFIGURATION
+# ================================================================
+
+st.set_page_config(
+    page_title="Executive Summary & Anomalies",
+    layout="wide"
+)
+
+
+# ================================================================
+# STEP 1: POWER BI DATA EXTRACTION
+# ================================================================
+
+@st.cache_data(
+    ttl=60,
+    show_spinner="Interrogation du modèle sémantique Power BI..."
+)
 def get_data() -> pd.DataFrame:
-    return load_clean()
+
+    terminal_header("[ÉTAPE 1/6] MODÈLE SÉMANTIQUE & EXTRACTION DAX")
+
+    start_time = time.perf_counter()
+
+    terminal_step(
+        "Connexion au modèle sémantique Power BI..."
+    )
+
+    try:
+        df = load_from_powerbi()
+
+        duration = time.perf_counter() - start_time
+
+        terminal_success(
+            f"Extraction terminée : {len(df)} lignes récupérées",
+            duration
+        )
+
+        return df
+
+    except Exception as exc:
+        terminal_error(f"Échec de l'extraction Power BI : {exc}")
+        raise
 
 
-df = get_data()
-st.title("Executive Summary & Anomalies - AdventureWorks Sales")
+try:
+    df = get_data()
 
-# ----------------------------------------------------------------- sidebar: scope
+except PowerBIConnectionError as exc:
+
+    terminal_error(str(exc))
+
+    st.error(
+        "Connexion au modèle sémantique Power BI impossible."
+    )
+
+    st.code(str(exc))
+
+    st.info(
+        "Ouvre le PBIP dans Power BI Desktop et renseigne "
+        "POWERBI_ADOMD_DATA_SOURCE, POWERBI_ADOMD_CATALOG "
+        "et éventuellement POWERBI_ADOMD_DLL dans .env."
+    )
+
+    st.stop()
+
+except Exception as exc:
+
+    terminal_error(str(exc))
+
+    st.error(
+        "Une erreur est survenue pendant la récupération des données."
+    )
+
+    st.exception(exc)
+
+    st.stop()
+
+
+if df.empty:
+
+    terminal_error("Aucune donnée récupérée depuis Power BI.")
+
+    st.error(
+        "La requête DAX n'a retourné aucune ligne "
+        "pour les mesures et dimensions requises."
+    )
+
+    st.stop()
+
+
+# Cette ligne s'affiche aussi si les données viennent du cache.
+# Elle ne signifie donc pas forcément une nouvelle extraction Power BI.
+terminal_success(
+    f"Dataset disponible : {len(df)} lignes."
+)
+
+
+# ================================================================
+# DASHBOARD HEADER
+# ================================================================
+
+st.title(
+    "Executive Summary & Anomalies - AdventureWorks Sales"
+)
+
+st.caption(
+    f"Source : modèle sémantique Power BI · "
+    f"{len(df):,} combinaisons mensuelles · "
+    f"{df['date'].min():%Y-%m} à {df['date'].max():%Y-%m}"
+)
+
+
+# ================================================================
+# SIDEBAR: FILTERS AND AI PROVIDER
+# ================================================================
+
 with st.sidebar:
-    st.header("Scope")
-    channel = st.selectbox("Channel", ["All"] + sorted(df["Channel"].unique()))
-    group = st.selectbox("Region", ["All"] + sorted(df["Group"].unique()))
-    category = st.selectbox("Category", ["All"] + sorted(df["Category"].unique()))
-    months = [d.strftime("%Y-%m") for d in sorted(df["date"].unique())]
-    start, end = st.select_slider("Period", options=months, value=(months[0], months[-1]))
-    st.header("Text generation")
-    options = ["mock"] + list(PROVIDERS)
-    default = default_provider() if default_provider() in options else "mock"
-    provider = st.selectbox("Provider", options, index=options.index(default),
-                            help="'mock' = offline templates (no API key). Others need the .env file.")
-    rec = reconcile(df)
-    st.caption("Data check vs Power BI totals: " + ("OK" if all(v["ok"] for v in rec.values()) else "MISMATCH"))
 
-scope = Scope(None if channel == "All" else channel, None if group == "All" else group,
-              None if category == "All" else category, start, end)
-payload = build_payload(df, scope)
-sub, _ = apply_scope(df, scope)
+    st.header("Scope")
+
+    if getattr(df, "attrs", {}).get("source_type") == "live_powerbi":
+        st.success(
+            "🟢 Connecté en direct au modèle Power BI"
+        )
+    else:
+        st.info(
+            "🟡 Mode Snapshot Certifié (PBIP / TMDL)"
+        )
+
+    with st.expander("Champs validés depuis PBIP/TMDL"):
+
+        st.json(
+            validate_query_contract()
+        )
+
+    channel = st.selectbox(
+        "Channel",
+        ["All"] + sorted(df["Channel"].unique())
+    )
+
+    group = st.selectbox(
+        "Region",
+        ["All"] + sorted(df["Group"].unique())
+    )
+
+    category = st.selectbox(
+        "Category",
+        ["All"] + sorted(df["Category"].unique())
+    )
+
+    months = [
+        d.strftime("%Y-%m")
+        for d in sorted(df["date"].unique())
+    ]
+
+    start, end = st.select_slider(
+        "Period",
+        options=months,
+        value=(months[0], months[-1])
+    )
+
+    st.header("Text generation")
+
+    options = ["mock"] + list(PROVIDERS)
+
+    default = (
+        default_provider()
+        if default_provider() in options
+        else "mock"
+    )
+
+    provider = st.selectbox(
+        "Provider",
+        options,
+        index=options.index(default),
+        help=(
+            "'mock' = offline templates (no API key). "
+            "Others need the .env file."
+        )
+    )
+
+    st.caption(
+        "Les KPI et segments proviennent des mesures DAX du modèle."
+    )
+
+
+# ================================================================
+# STEP 2: FILTERING
+# ================================================================
+
+terminal_header("[ÉTAPE 2/6] FILTRAGE DU PÉRIMÈTRE (SCOPE & PUSH-DOWN)")
+
+scope = Scope(
+    None if channel == "All" else channel,
+    None if group == "All" else group,
+    None if category == "All" else category,
+    start,
+    end
+)
+
+terminal_step("Application des filtres sélectionnés...")
+
+filter_start = time.perf_counter()
+
+try:
+
+    sub, _ = apply_scope(df, scope)
+
+    filter_duration = time.perf_counter() - filter_start
+
+    terminal_success(
+        f"Filtrage terminé : {len(sub)} lignes conservées",
+        filter_duration
+    )
+
+except Exception as exc:
+
+    terminal_error(f"Erreur pendant le filtrage : {exc}")
+
+    st.error(
+        "Impossible d'appliquer les filtres."
+    )
+
+    st.exception(exc)
+
+    st.stop()
+
+
+# ================================================================
+# STEP 3: ANOMALY DETECTION
+# ================================================================
+
+terminal_step(
+    "Exécution du moteur de détection des anomalies..."
+)
+
+detection_start = time.perf_counter()
+
+try:
+
+    payload = build_payload(df, scope)
+
+    detection_duration = time.perf_counter() - detection_start
+
+    if payload["status"] == "ok":
+
+        terminal_success(
+            f"Détection terminée : "
+            f"{len(payload['anomalies'])} anomalie(s) détectée(s)",
+            detection_duration
+        )
+
+        # Détail des anomalies dans le terminal
+        for anomaly in payload["anomalies"]:
+
+            print(
+                f"   - {anomaly['id']} | "
+                f"{anomaly['rule']} | "
+                f"{anomaly['period']} | "
+                f"{anomaly['direction']}",
+                flush=True
+            )
+
+    else:
+
+        terminal_error(
+            payload.get(
+                "reason",
+                "Aucune donnée exploitable pour ce périmètre."
+            )
+        )
+
+except Exception as exc:
+
+    terminal_error(
+        f"Erreur pendant la détection : {exc}"
+    )
+
+    st.error(
+        "Le moteur de détection des anomalies a rencontré une erreur."
+    )
+
+    st.exception(exc)
+
+    st.stop()
+
+
+terminal_success(
+    "Préparation des résultats terminée."
+)
+
+print("=" * 65, flush=True)
+
+
+# ================================================================
+# DASHBOARD LAYOUT
+# ================================================================
 
 left, right = st.columns([1.1, 1])
 
-# ----------------------------------------------------------------- left: KPIs + charts
+
+# ================================================================
+# LEFT: KPIs, CHARTS AND ANOMALIES
+# ================================================================
+
 with left:
+
+    st.header("Business performance")
+
     if payload["status"] != "ok":
-        st.warning("No data available for this scope. " + payload.get("reason", ""))
+
+        st.warning(
+            "No data available for this scope. "
+            + payload.get("reason", "")
+        )
+
     else:
+
+        # --------------------------------------------------------
+        # KPIs
+        # --------------------------------------------------------
+
         k = payload["kpis"]
+
         c1, c2, c3, c4 = st.columns(4)
-        c1.metric("Sales", k["sales"]["display"])
-        c2.metric("Cost", k["cost"]["display"])
-        c3.metric("Profit", k["profit"]["display"])
-        c4.metric("Margin", k["profit_margin_pct"]["display"])
+
+        c1.metric(
+            "Sales",
+            k["sales"]["display"]
+        )
+
+        c2.metric(
+            "Cost",
+            k["cost"]["display"]
+        )
+
+        c3.metric(
+            "Profit",
+            k["profit"]["display"]
+        )
+
+        c4.metric(
+            "Margin",
+            k["profit_margin_pct"]["display"]
+        )
+
+        # --------------------------------------------------------
+        # Monthly sales
+        # --------------------------------------------------------
 
         m = monthly(sub).reset_index()
-        flagged = {a["period"] for a in payload["anomalies"] if a["rule"] in ("R1_margin_alert", "R2_sales_variation")}
-        m["flagged"] = m["date"].dt.strftime("%Y-%m").isin(flagged)
-        fig = px.bar(m, x="date", y="Sales", color="flagged", title="Monthly sales (months with an anomaly highlighted)",
-                     color_discrete_map={True: "#d62728", False: "#1f77b4"})
-        st.plotly_chart(fig, use_container_width=True)
-        fig2 = px.line(m, x="date", y="margin", title="Monthly profit margin (%)", markers=True)
-        st.plotly_chart(fig2, use_container_width=True)
+
+        flagged = {
+            a["period"]
+            for a in payload["anomalies"]
+            if a["rule"] in (
+                "R1_margin_alert",
+                "R2_sales_variation"
+            )
+        }
+
+        m["flagged"] = (
+            m["date"].dt.strftime("%Y-%m").isin(flagged)
+        )
+
+        fig = px.bar(
+            m,
+            x="date",
+            y="Sales",
+            color="flagged",
+            title=(
+                "Monthly sales "
+                "(months with an anomaly highlighted)"
+            ),
+            color_discrete_map={
+                True: "#d62728",
+                False: "#1f77b4"
+            }
+        )
+
+        st.plotly_chart(
+            fig,
+            width="stretch"
+        )
+
+        # --------------------------------------------------------
+        # Monthly profit margin
+        # --------------------------------------------------------
+
+        fig2 = px.line(
+            m,
+            x="date",
+            y="margin",
+            title="Monthly profit margin (%)",
+            markers=True
+        )
+
+        st.plotly_chart(
+            fig2,
+            width="stretch"
+        )
+
+        # --------------------------------------------------------
+        # Margin by channel
+        # --------------------------------------------------------
+
         if "Channel" in payload["breakdown"]:
-            b = pd.DataFrame([{"Channel": r["segment"], "Margin %": r["margin_pct"]["value"]}
-                              for r in payload["breakdown"]["Channel"]])
-            st.plotly_chart(px.bar(b, x="Channel", y="Margin %", title="Margin by channel"), use_container_width=True)
 
-        st.subheader("Anomalies detected by the engine ")
-        rows = [{"id": a["id"], "rule": a["rule"], "direction": a["direction"], "period": a["period"],
-                 "what": a["what"]} for a in payload["anomalies"]]
-        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+            b = pd.DataFrame([
+                {
+                    "Channel": r["segment"],
+                    "Margin %": r["margin_pct"]["value"]
+                }
+                for r in payload["breakdown"]["Channel"]
+            ])
+
+            st.plotly_chart(
+                px.bar(
+                    b,
+                    x="Channel",
+                    y="Margin %",
+                    title="Margin by channel"
+                ),
+                width="stretch"
+            )
+
+        # --------------------------------------------------------
+        # Detected anomalies
+        # --------------------------------------------------------
+
+        st.subheader(
+            "Anomalies detected by the engine"
+        )
+
+        rows = [
+            {
+                "id": a["id"],
+                "rule": a["rule"],
+                "severity": a.get("metrics", {}).get("severity", "moderate"),
+                "direction": a["direction"],
+                "period": a["period"],
+                "what": a["what"]
+            }
+            for a in payload["anomalies"]
+        ]
+
+        st.dataframe(
+            pd.DataFrame(rows),
+            width="stretch",
+            hide_index=True
+        )
+
+        # --------------------------------------------------------
+        # JSON sent to the LLM
+        # --------------------------------------------------------
+
         with st.expander("JSON sent to the LLM"):
-            st.code(json.dumps(payload, ensure_ascii=False, indent=2), language="json")
 
-# ----------------------------------------------------------------- right: narrative + validation
+            st.code(
+                json.dumps(
+                    payload,
+                    ensure_ascii=False,
+                    indent=2
+                ),
+                language="json"
+            )
+
+
+# ================================================================
+# RIGHT: AI NARRATIVE AND HUMAN VALIDATION
+# ================================================================
+
 with right:
-    st.subheader("AI narrative")
-    key = json.dumps(scope.as_dict(), sort_keys=True) + provider
-    if st.session_state.get("key") != key:
-        st.session_state.update(key=key, summary="", root_cause="", validated=None)
 
-    if st.button("Generate summary", type="primary", disabled=payload["status"] != "ok"):
-        with st.spinner("Generating..."):
-            try:
-                st.session_state.summary = generate("summary", payload, provider)
-                st.session_state.root_cause = generate("root_cause", payload, provider)
-                st.session_state.validated = None
-            except Exception as e:  # missing key, network, quota...
-                st.error(f"Generation failed: {e}")
+    st.header("AI narrative")
+
+    # ------------------------------------------------------------
+    # Reset AI results when filters or provider change
+    # ------------------------------------------------------------
+
+    key = (
+        json.dumps(
+            scope.as_dict(),
+            sort_keys=True
+        )
+        + provider
+    )
+
+    if st.session_state.get("key") != key:
+
+        st.session_state.update(
+            key=key,
+            summary="",
+            root_cause="",
+            validated=None
+        )
+
+    # ------------------------------------------------------------
+    # STEP 4: AI GENERATION
+    # ------------------------------------------------------------
+
+    if st.button(
+        "Generate summary",
+        type="primary",
+        disabled=payload["status"] != "ok"
+    ):
+
+        terminal_header("[ÉTAPE 4/6] GÉNÉRATION DU RÉSUMÉ EXÉCUTIF PAR LE LLM")
+
+        try:
+
+            # Generate executive summary
+            ai_start = time.perf_counter()
+
+            terminal_step(
+                f"Envoi du payload au fournisseur IA : {provider}"
+            )
+
+            terminal_step(
+                "Génération du résumé exécutif..."
+            )
+
+            st.session_state.summary = generate(
+                "summary",
+                payload,
+                provider
+            )
+
+            summary_duration = (
+                time.perf_counter() - ai_start
+            )
+
+            terminal_success(
+                "Résumé exécutif généré",
+                summary_duration
+            )
+
+            # Explain anomalies
+            root_start = time.perf_counter()
+
+            terminal_step(
+                "Génération de l'explication des anomalies..."
+            )
+
+            st.session_state.root_cause = generate(
+                "root_cause",
+                payload,
+                provider
+            )
+
+            root_duration = (
+                time.perf_counter() - root_start
+            )
+
+            terminal_success(
+                "Explication des anomalies générée",
+                root_duration
+            )
+
+            st.session_state.validated = None
+
+            terminal_success(
+                "Génération IA terminée."
+            )
+
+            print("=" * 65, flush=True)
+
+        except Exception as exc:
+
+            terminal_error(
+                f"Échec de la génération IA : {exc}"
+            )
+
+            st.error(
+                f"Generation failed: {exc}"
+            )
+
+    # ------------------------------------------------------------
+    # DISPLAY AI CONTENT
+    # ------------------------------------------------------------
 
     if st.session_state.get("summary"):
-        st.session_state.summary = st.text_area("Executive summary (editable)", st.session_state.summary, height=260)
-        st.session_state.root_cause = st.text_area("Anomalies explained (editable)", st.session_state.root_cause, height=260)
-        check = check_text(st.session_state.summary + "\n" + st.session_state.root_cause, payload)
-        if check["ok"]:
-            st.success(f"Number check: all {check['numbers_checked']} figures found in the JSON.")
-        else:
-            st.error("Figures not found in the JSON: " + ", ".join(u["text"] for u in check["ungrounded"]))
 
-        st.subheader("Human validation")
-        reviewer = st.text_input("Reviewer name")
-        answers = {q: st.checkbox(q, key=f"chk_{i}") for i, q in enumerate(CHECKLIST)}
-        notes = st.text_input("Notes (optional)")
-        name = "app_" + "_".join(v for v in (channel, group, category, start, end) if v and v != "All")
-        draft = render_markdown(name, payload, st.session_state.summary, st.session_state.root_cause, check, provider)
-        if st.button("Record decision", disabled=not reviewer):
-            md, info = apply_validation(draft, reviewer, answers, notes)
-            st.session_state.validated = md
-            config.OUTPUT_DIR.mkdir(exist_ok=True)
-            pdf_path = config.OUTPUT_DIR / f"{name}_report.pdf"
-            pdf_path.write_bytes(markdown_to_pdf(md))
-            log(info, pdf_path.name)
-            st.success(info["decision"])
-        final = st.session_state.get("validated") or draft
-        st.caption("Status of the export: " + ("validated report" if st.session_state.get("validated") else "AI draft"))
-        st.download_button("Download report (PDF)", markdown_to_pdf(final),
-                           file_name=f"{name}_report.pdf", mime="application/pdf")
+        st.subheader(
+            "Executive summary"
+        )
+
+        st.session_state.summary = st.text_area(
+            "Executive summary (editable)",
+            st.session_state.summary,
+            height=260
+        )
+
+        st.session_state.root_cause = st.text_area(
+            "Anomalies explained (editable)",
+            st.session_state.root_cause,
+            height=260
+        )
+
+        # --------------------------------------------------------
+        # STEP 5: NUMBER VERIFICATION
+        # --------------------------------------------------------
+
+        terminal_step(
+            "Vérification des chiffres du texte IA..."
+        )
+
+        check = check_text(
+            st.session_state.summary
+            + "\n"
+            + st.session_state.root_cause,
+            payload
+        )
+
+        if check["ok"]:
+
+            terminal_success(
+                f"Vérification terminée : "
+                f"{check['numbers_checked']} chiffres vérifiés"
+            )
+
+            st.success(
+                f"Number check: all "
+                f"{check['numbers_checked']} figures found in the JSON."
+            )
+
+        else:
+
+            terminal_error(
+                "Certains chiffres du texte ne sont pas présents dans le JSON."
+            )
+
+            st.error(
+                "Figures not found in the JSON: "
+                + ", ".join(
+                    u["text"]
+                    for u in check["ungrounded"]
+                )
+            )
+
+        # --------------------------------------------------------
+        # STEP 6: HUMAN VALIDATION
+        # --------------------------------------------------------
+
+        st.subheader(
+            "Human validation"
+        )
+
+        reviewer = st.text_input(
+            "Reviewer name"
+        )
+
+        answers = {
+            q: st.checkbox(
+                q,
+                key=f"chk_{i}"
+            )
+            for i, q in enumerate(CHECKLIST)
+        }
+
+        notes = st.text_input(
+            "Notes (optional)"
+        )
+
+        name = "app_" + "_".join(
+            v
+            for v in (
+                channel,
+                group,
+                category,
+                start,
+                end
+            )
+            if v and v != "All"
+        )
+
+        draft = render_markdown(
+            name,
+            payload,
+            st.session_state.summary,
+            st.session_state.root_cause,
+            check,
+            provider
+        )
+
+        # --------------------------------------------------------
+        # Record human decision
+        # --------------------------------------------------------
+
+        if st.button(
+            "Record decision",
+            disabled=not reviewer
+        ):
+
+            terminal_step(
+                "Enregistrement de la décision humaine..."
+            )
+
+            try:
+
+                md, info = apply_validation(
+                    draft,
+                    reviewer,
+                    answers,
+                    notes
+                )
+
+                st.session_state.validated = md
+
+                config.OUTPUT_DIR.mkdir(
+                    exist_ok=True
+                )
+
+                pdf_path = (
+                    config.OUTPUT_DIR
+                    / f"{name}_report.pdf"
+                )
+
+                pdf_path.write_bytes(
+                    markdown_to_pdf(md)
+                )
+
+                log(
+                    info,
+                    pdf_path.name
+                )
+
+                terminal_success(
+                    f"Décision enregistrée : {info['decision']}"
+                )
+
+                terminal_success(
+                    f"Rapport PDF créé : {pdf_path}"
+                )
+
+                st.success(
+                    info["decision"]
+                )
+
+            except Exception as exc:
+
+                terminal_error(
+                    f"Erreur pendant la validation : {exc}"
+                )
+
+                st.error(
+                    f"Validation failed: {exc}"
+                )
+
+        # --------------------------------------------------------
+        # STEP 7: PDF EXPORT
+        # --------------------------------------------------------
+
+        final = (
+            st.session_state.get("validated")
+            or draft
+        )
+
+        st.caption(
+            "Status of the export: "
+            + (
+                "validated report"
+                if st.session_state.get("validated")
+                else "AI draft"
+            )
+        )
+
+        st.download_button(
+            "Download report (PDF)",
+            markdown_to_pdf(final),
+            file_name=f"{name}_report.pdf",
+            mime="application/pdf"
+        )

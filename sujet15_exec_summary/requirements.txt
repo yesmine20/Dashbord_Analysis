@@ -5,6 +5,7 @@ python-dotenv>=1.0
 streamlit>=1.30
 plotly>=5.18
 reportlab>=4.0
+pythonnet>=3.0.3; sys_platform == "win32"
 # Only needed for the matching provider (LLM_PROVIDER in .env):
 openai>=1.30        # provider "openai" or "azure"
 anthropic>=0.30     # provider "anthropic"

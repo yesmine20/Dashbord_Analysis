@@ -1,11 +1,14 @@
 # Architecture
 
 ```
-Power BI (AdventureWorks_Sales.pbix)
-   |  export "Données résumées" (1 visuel Tableau)
+Power BI Project (PBIP: PBIR report + TMDL semantic model)
+   |  TMDL defines dimensions, relationships and DAX measures
    v
-data/export_kpi_mensuel.csv
-   |  src/load_data.py      nettoyage, contrôle des totaux vs rapport Power BI
+Power BI Desktop semantic model (local ADOMD.NET endpoint)
+   |  read-only DAX query in src/powerbi.py
+   v
+Monthly facts grouped by Category, Group and Channel
+   |  src/load_data.py      scope filters and monthly rollups
    v
 src/detect.py               5 règles déterministes (aucun LLM)  ->  JSON standardisé
    |
@@ -35,6 +38,6 @@ Rapport VALIDATED / NEEDS REVISION  (+ outputs/validation_log.csv)
 
 - Périmètre vide ou valeur de filtre inconnue (ex. région "Germany", année 2023) : le JSON porte `status: "no_data"` et le
   pipeline renvoie "No data available" **sans appeler le LLM**.
-- Les années partielles (2017 = juillet-décembre, 2020 = janvier-juin) sont déclarées dans `limitations`, et la comparaison
+- Les années partielles observées dans la période renvoyée par le modèle sont déclarées dans `limitations`, et la comparaison
   annuelle se fait sur une fenêtre équivalente (règle R3).
 - Les commandes (`Orders`) ne sont pas additives d'une ligne à l'autre : elles sont exclues.

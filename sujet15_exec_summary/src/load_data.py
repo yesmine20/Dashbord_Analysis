@@ -1,49 +1,14 @@
-"""Load and clean the Power BI export, apply scope filters."""
+"""Load semantic-model query results and apply analysis scope filters."""
+from __future__ import annotations
+
 from dataclasses import dataclass, asdict
-from pathlib import Path
-
 import pandas as pd
-
-from . import config
-
-REQUIRED = ["Year", "Month", "Category", "Group", "Channel", "Sales", "Cost", "Profit", "Orders"]
+from .powerbi import get_analysis_data
 
 
-def _to_number(s: pd.Series) -> pd.Series:
-    """Parse '$1,234', '($36)', '-$36', '40%' into floats."""
-    s = s.astype(str).str.strip()
-    neg = s.str.contains(r"^\(|^-|^\u2212|\$-|\$\u2212", regex=True)
-    clean = s.str.replace(r"[^\d.]", "", regex=True)
-    val = pd.to_numeric(clean, errors="coerce")
-    return val.where(~neg, -val)
-
-
-def load_clean(path=config.DATA_PATH) -> pd.DataFrame:
-    df = pd.read_csv(path, encoding="utf-8-sig")
-    df.columns = [c.strip() for c in df.columns]
-    missing = [c for c in REQUIRED if c not in df.columns]
-    if missing:
-        raise ValueError(f"Missing columns in {path}: {missing}")
-    for c in ("Sales", "Cost", "Profit", "Orders"):
-        df[c] = _to_number(df[c])
-    date = pd.to_datetime(df["Month"], errors="coerce")
-    if date.isna().any():  # fallback for labels like 'Nov, 2017'
-        date = date.fillna(pd.to_datetime(df["Month"], format="%b, %Y", errors="coerce"))
-    df["date"] = date.dt.to_period("M").dt.to_timestamp()
-    for c in ("Category", "Group", "Channel"):
-        df[c] = df[c].astype(str).str.strip()
-    df = df.dropna(subset=["date", "Sales", "Cost", "Profit"]).copy()
-    df["Year"] = df["Year"].astype(int)
-    return df[["date", "Year", "Category", "Group", "Channel", "Sales", "Cost", "Profit", "Orders"]]
-
-
-def reconcile(df: pd.DataFrame) -> dict:
-    """Compare CSV totals with the totals displayed in the Power BI report."""
-    out = {}
-    for k, expected in config.EXPECTED_TOTALS.items():
-        got = float(df[k].sum())
-        out[k] = {"csv": got, "report": expected, "ok": abs(got - expected) <= max(1.0, 0.0001 * expected)}
-    return out
+def load_from_powerbi(scope: Scope | None = None) -> pd.DataFrame:
+    """Query the Power BI semantic model (with optional DAX Query Push-down)."""
+    return get_analysis_data(scope=scope)
 
 
 @dataclass

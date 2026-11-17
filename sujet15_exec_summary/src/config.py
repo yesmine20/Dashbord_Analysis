@@ -3,17 +3,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA_PATH = ROOT / "data" / "export_kpi_mensuel.csv"
 OUTPUT_DIR = ROOT / "outputs"
+PBIP_MODEL_DIR = ROOT / "AdventureWorks Sales.SemanticModel" / "definition"
 
-REPORT_NAME = "AdventureWorks Sales (Power BI export, monthly)"
+REPORT_NAME = "AdventureWorks Sales (Power BI semantic model)"
 CURRENCY = "USD"
-# Selector that was active when the CSV was exported from Power BI Desktop.
-DATE_BASIS = "Order Date (selector 'By Order Date' at export time; verify if re-exporting)"
-
-# Totals shown by the Power BI report (row "Total" of the export table).
-# Used to check that the CSV matches the dashboard (tolerance: 0.01 %).
-EXPECTED_TOTALS = {"Sales": 109_809_274, "Cost": 97_257_908, "Profit": 12_551_366}
+DATE_BASIS = "Order Date (active relationship: Sales[OrderDateKey] → Date[DateKey])"
 
 
 @dataclass(frozen=True)

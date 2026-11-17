@@ -1,10 +1,14 @@
 """Prompts (English, as required by the project). Guardrails live in SYSTEM_PROMPT."""
 import json
+from .semantic_model import get_semantic_context_for_prompt
 
 NO_DATA = "No data available"
 
 SYSTEM_PROMPT = f"""You are a reporting assistant that writes for C-level executives.
-You receive ONE JSON document produced by a deterministic analytics engine. It is your only source of truth.
+You receive ONE JSON document produced by a deterministic analytics engine connected to a Power BI Semantic Model.
+It is your only source of truth.
+
+{get_semantic_context_for_prompt()}
 
 STRICT RULES
 1. Use ONLY facts and numbers that appear in the JSON. When you quote a figure, copy its "display" string exactly

@@ -4,9 +4,9 @@
 (Générer un résumé exécutif et expliquer les anomalies d'un dashboard Power BI. Dashboard : AdventureWorks Sales.)
 
 ## 2. Données et préparation
-- Source : export Power BI (visuel Tableau, données résumées), 461 lignes, 2017-07 à 2020-06.
-- Contrôle : totaux du CSV = totaux du rapport (voir `reconcile` dans src/load_data.py).
-- Limites : pas d'objectifs; années 2017 et 2020 partielles; `Orders` non additif.
+- Source : modèle sémantique Power BI interrogé en DAX; documenter ici la période réelle et le périmètre.
+- Contrôle : comparer les mesures renvoyées par DAX aux visuels Power BI sous le même filtre et la même base de date.
+- Limites : pas d'objectifs; années partielles à déterminer selon la période actuelle; `Orders` non additif.
 
 ## 3. Approche de détection
 (Décrire les 5 règles et les seuils : voir docs/rules.md. Justifier seuil relatif + absolu.)

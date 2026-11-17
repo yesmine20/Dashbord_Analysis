@@ -67,25 +67,41 @@ def rule_margin(df, th: Thresholds):
         if r.Sales < th.margin_min_sales:
             continue
         base = None
+        std = None
+        z_score = None
         if i >= th.margin_lookback:
             prev = m.iloc[i - th.margin_lookback:i]
             pidx = list(prev.index) + [d]
             contiguous = all(_months_between(pidx[j], pidx[j + 1]) == 1 for j in range(len(pidx) - 1))
             if contiguous and prev.Sales.sum() > 0:
                 base = prev.Profit.sum() / prev.Sales.sum() * 100
+                margins = (prev.Profit / prev.Sales.where(prev.Sales > 0)) * 100
+                if len(margins) >= 2:
+                    std = float(margins.std(ddof=1))
+                    if std > 0.05:
+                        z_score = round(float((r.margin - base) / std), 2)
         negative = r.Profit < 0
         drop = (base - r.margin) if base is not None else None
         if negative or (drop is not None and drop >= th.margin_drop_pts):
             impact = (r.margin - base) / 100 * r.Sales if base is not None else r.Profit
-            found.append((abs(impact), d, r, base, drop, impact, negative))
+            severity = (
+                "critical" if (negative or (z_score is not None and z_score <= -3.0))
+                else ("high" if (z_score is not None and z_score <= -2.0) or (drop is not None and drop >= 10.0)
+                else "moderate")
+            )
+            found.append((abs(impact), d, r, base, drop, impact, negative, z_score, std, severity))
     found.sort(key=lambda x: -x[0])
     out = []
-    for _, d, r, base, drop, impact, negative in found[:th.max_anomalies_per_rule]:
+    for _, d, r, base, drop, impact, negative, z_score, std, severity in found[:th.max_anomalies_per_rule]:
         metrics = {"sales": usd(r.Sales), "profit": usd(r.Profit), "margin_pct": pct(r.margin),
-                   "negative_profit": bool(negative)}
+                   "negative_profit": bool(negative), "severity": severity}
         if base is not None:
             metrics.update({"baseline_margin_pct": pct(base), "margin_drop_pts": pts(drop),
                             "profit_vs_baseline": usd(impact)})
+        if z_score is not None:
+            metrics["z_score"] = z_score
+            if std is not None:
+                metrics["margin_std_dev_pts"] = pts(std)
         out.append({"rule": "R1_margin_alert", "direction": "negative", "period": _period(d),
                     "what": ("Monthly profit was negative." if negative else
                              "Monthly profit margin fell well below its trailing baseline."),
@@ -107,17 +123,36 @@ def rule_sales_variation(df, th: Thresholds):
         change = cur_s - prev_s
         change_pct = change / prev_s * 100
         if abs(change_pct) >= th.sales_var_pct and abs(change) >= th.sales_var_abs:
-            found.append((abs(change), idx[i], idx[i - 1], cur_s, prev_s, change, change_pct))
+            # Check historical seasonality if prior year same month exists
+            d = idx[i]
+            pd_ = idx[i - 1]
+            prior_year_d = d - pd.DateOffset(years=1)
+            prior_year_pd = pd_ - pd.DateOffset(years=1)
+            seasonal_info = None
+            if prior_year_d in m.index and prior_year_pd in m.index:
+                py_s = m.loc[prior_year_d, "Sales"]
+                py_prev_s = m.loc[prior_year_pd, "Sales"]
+                if py_prev_s > 0:
+                    py_pct = (py_s - py_prev_s) / py_prev_s * 100
+                    same_dir = (change_pct > 0 and py_pct > 0) or (change_pct < 0 and py_pct < 0)
+                    seasonal_info = {
+                        "prior_year_same_month_change_pct": pct(py_pct),
+                        "seasonal_pattern_match": bool(same_dir and abs(change_pct - py_pct) <= 20.0),
+                    }
+            found.append((abs(change), d, pd_, cur_s, prev_s, change, change_pct, seasonal_info))
     found.sort(key=lambda x: -x[0])
     out = []
-    for _, d, pd_, cur_s, prev_s, change, change_pct in found[:th.max_anomalies_per_rule]:
+    for _, d, pd_, cur_s, prev_s, change, change_pct, seasonal_info in found[:th.max_anomalies_per_rule]:
         row = m.loc[d]
+        metrics = {"sales": usd(cur_s), "previous_sales": usd(prev_s),
+                    "sales_change": usd(change), "sales_change_pct": pct(change_pct),
+                    "profit": usd(row.Profit), "margin_pct": pct(row.margin)}
+        if seasonal_info:
+            metrics["seasonality"] = seasonal_info
         out.append({"rule": "R2_sales_variation", "direction": "positive" if change > 0 else "negative",
                     "period": _period(d),
                     "what": f"Month-over-month sales change versus {_period(pd_)}.",
-                    "metrics": {"sales": usd(cur_s), "previous_sales": usd(prev_s),
-                                "sales_change": usd(change), "sales_change_pct": pct(change_pct),
-                                "profit": usd(row.Profit), "margin_pct": pct(row.margin)},
+                    "metrics": metrics,
                     "contributors": {"largest_changes_by_segment":
                                      _delta_contributors(df, [d], [pd_], "Sales", th.top_contributors)}})
     return out, len(found)

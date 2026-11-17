@@ -13,6 +13,12 @@ from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
 
 def _inline_markup(text: str) -> str:
     """Convert the small inline Markdown subset used by reports to ReportLab markup."""
+    text = text.translate(str.maketrans({
+        "\u00a0": " ",
+        "\u2010": "-",
+        "\u2011": "-",
+        "\u202f": " ",
+    }))
     safe = escape(text, quote=False)
     safe = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", safe)
     safe = re.sub(r"`(.+?)`", r"<font name='Courier'>\1</font>", safe)

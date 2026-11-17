@@ -1,0 +1,6 @@
+// Bienvenue dans l’affichage des requêtes DAX ! En savoir plus sur les requêtes DAX sur https://aka.ms/dax-queries.
+// Cliquez avec le bouton droit sur des tables, des colonnes ou des mesures dans le volet de données pour accéder aux requêtes rapides, ou demandez à Copilot de l’aide pour écrire DAX.
+
+// Sélectionnez « Exécuter » pour essayer cet exemple de requête DAX.
+EVALUATE
+    TOPN(100, 'Customer')

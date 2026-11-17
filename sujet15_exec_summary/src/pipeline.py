@@ -1,4 +1,4 @@
-"""End-to-end run: CSV -> detection -> JSON -> LLM text -> number check -> Markdown (AI draft).
+"""End-to-end run: Power BI semantic model -> detection -> JSON -> LLM -> report.
 
 Examples
   python -m src.pipeline --scenario S02
@@ -13,7 +13,7 @@ from . import config
 from .check_numbers import check_text
 from .detect import build_payload
 from .llm_client import default_provider, generate
-from .load_data import Scope, load_clean, reconcile
+from .load_data import Scope, load_from_powerbi
 from .report import render_markdown
 
 SCENARIO_FILE = config.ROOT / "scenarios" / "scenarios.json"
@@ -52,13 +52,10 @@ def main():
     ap.add_argument("--start", help="YYYY-MM"); ap.add_argument("--end", help="YYYY-MM")
     ap.add_argument("--provider", help="mock | openai | azure | anthropic | groq (default: LLM_PROVIDER or mock)")
     ap.add_argument("--out-dir", default=str(config.OUTPUT_DIR))
-    ap.add_argument("--data", default=str(config.DATA_PATH))
     a = ap.parse_args()
 
-    df = load_clean(a.data)
-    rec = reconcile(df)
-    bad = [k for k, v in rec.items() if not v["ok"]]
-    print("Data check vs Power BI totals:", "OK" if not bad else f"MISMATCH on {bad}")
+    df = load_from_powerbi()
+    print(f"Power BI semantic model: {len(df)} monthly segment rows loaded.")
 
     jobs = []
     if a.all:

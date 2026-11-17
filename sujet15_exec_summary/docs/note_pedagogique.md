@@ -2,17 +2,17 @@
 
 ## 1. Objectif et scénario métier
 
-Un responsable consulte un tableau de bord Power BI et veut comprendre rapidement les performances, les changements importants et les points qui méritent une vérification. Le projet transforme un export mensuel de KPI en un résumé court et en commentaires sur les anomalies. Le texte produit par l’IA reste un brouillon : une personne le relit et décide s’il peut être partagé.
+Un responsable consulte un tableau de bord Power BI et veut comprendre rapidement les performances, les changements importants et les points qui méritent une vérification. Le projet interroge le modèle sémantique Power BI et transforme les résultats en résumé court et commentaires sur les anomalies. Le texte produit par l’IA reste un brouillon : une personne le relit et décide s’il peut être partagé.
 
 **Principe de conception : le code calcule, le modèle rédige, une personne valide.** Le modèle ne reçoit pas les lignes détaillées du fichier source : il reçoit un JSON agrégé préparé par le moteur d’analyse.
 
-## 2. Données et nettoyage
+## 2. Modèle et données interrogées
 
-La démonstration utilise un export du rapport Power BI AdventureWorks Sales. Le CSV contient 461 lignes, avec des champs de période, catégorie, région (`Group`), canal, ventes, coût, profit et commandes. La période couverte est juillet 2017 à juin 2020. La devise retenue est le dollar américain et le sélecteur de date de l’export est « Order Date ».
+Le PBIP/TMDL fournit les définitions de modèle et les mesures; l’application exécute une requête DAX en lecture seule sur le modèle sémantique chargé dans Power BI Desktop. La requête regroupe les mesures par mois, catégorie de produit, groupe de territoire et canal. La relation de date active est Order Date. La période disponible vient du modèle actif et peut évoluer après actualisation.
 
-Le module `src/load_data.py` effectue la préparation reproductible : lecture UTF‑8 avec BOM, normalisation des en-têtes, conversion des montants texte en nombres, conversion du mois en date mensuelle, nettoyage des libellés et exclusion des lignes sans date ou mesure financière exploitable. Les colonnes conservées et leur ordre sont explicités dans le code. `src/config.py` définit les totaux de référence issus du rapport; `reconcile` compare les totaux du fichier à ces références avec une tolérance de 0,01 %.
+`src/semantic_model.py` vérifie que les tables, champs et mesures DAX utilisés existent toujours dans les définitions TMDL. `src/powerbi.py` interroge ensuite les mesures `[Sales]`, `[Cost]`, `[Profit]` et `[Orders]`; `src/load_data.py` normalise les résultats et applique les filtres. `Orders` est une mesure distincte et n’est pas additionnée entre segments.
 
-Cette préparation est utile pour l’analyse, mais elle ne remplace pas une validation de qualité complète. Avant une présentation, vérifier le nombre de lignes rejetées, les doublons métier, la cohérence Year/Month, les valeurs manquantes dans les dimensions et la règle de calcul du profit dans le modèle Power BI. Le chargement actuel supprime les lignes incomplètes sans produire de bilan détaillé de ces rejets. `Orders` est conservé à la source mais exclu des agrégations, car cette mesure n’est pas additive entre lignes.
+Avant une présentation, rapprocher les résultats DAX des cartes et visuels du rapport sous les mêmes filtres; vérifier aussi la base de date, les relations actives, les valeurs vides et la définition métier de Profit. Les contrôles doivent être effectués sur le modèle sémantique réellement ouvert, pas sur un ancien export.
 
 ## 3. Méthode d’analyse et détection
 
@@ -28,7 +28,7 @@ Le moteur classe les alertes par impact et transmet au plus cinq alertes par rè
 
 ## 4. Génération du texte et garde-fous
 
-Le pipeline suit le schéma `CSV → préparation → KPI et règles → JSON → génération → contrôle des chiffres → brouillon Markdown → validation humaine`. Le schéma détaillé se trouve dans `docs/architecture.md`.
+Le pipeline suit le schéma `PBIP/TMDL → contrat des champs et mesures → requête DAX du modèle sémantique → KPI et règles → JSON → génération → contrôle des chiffres → brouillon Markdown → validation humaine`. Le schéma détaillé se trouve dans `docs/architecture.md`.
 
 Le mode `mock`, utilisé par défaut, produit des textes à partir de gabarits hors ligne. Il permet une démonstration reproductible sans clé API, mais **ce n’est pas une IA générative et il ne démontre pas la qualité d’un LLM**. Pour montrer réellement la partie « IA générative », configurer un fournisseur pris en charge dans `.env`, ne jamais versionner la clé, puis exécuter au moins quelques scénarios représentatifs avec le modèle choisi.
 
@@ -51,7 +51,7 @@ Protocole conseillé : tester les 20 scénarios avec le même modèle et le mêm
 ## 7. Difficultés, limites et bonnes pratiques
 
 - Le jeu de données n’inclut pas d’objectifs : aucune analyse « réel contre cible » n’est possible.
-- Les années 2017 et 2020 sont partielles; la comparaison annuelle doit utiliser des fenêtres identiques.
+- Les années partielles dépendent de la période renvoyée par le modèle; la comparaison annuelle doit utiliser des fenêtres identiques.
 - Les ventes mensuelles sont irrégulières; les seuils combinés sont des choix initiaux et peuvent produire des alertes manquées ou excessives.
 - Une variation et les segments qui y contribuent ne prouvent pas une explication commerciale. Il faut confronter toute hypothèse aux commandes et au contexte métier.
 - Le contrôle numérique diminue le risque de chiffres non étayés, mais ne garantit pas l’absence d’hallucination.

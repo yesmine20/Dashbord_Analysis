@@ -9,7 +9,7 @@ import json
 
 from . import config
 from .detect import build_payload
-from .load_data import Scope, load_clean
+from .load_data import Scope, load_from_powerbi
 from .pipeline import load_scenarios
 
 COLUMNS = ["id", "type", "description", "filters", "true_sales", "true_profit", "true_margin",
@@ -33,7 +33,7 @@ def _short(a: dict) -> str:
 
 
 def main():
-    df = load_clean()
+    df = load_from_powerbi()
     rows = []
     for s in load_scenarios():
         p = build_payload(df, Scope(**s["scope"]))

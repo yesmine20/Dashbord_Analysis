@@ -1,0 +1,8 @@
+﻿EVALUATE
+SUMMARIZECOLUMNS(
+    'Date'[Month],
+    "Orders", [Orders],
+    "Sales", [Sales]
+)
+ORDER BY
+    'Date'[Month]
