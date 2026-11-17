@@ -178,32 +178,6 @@ La date utilisée est la relation active :
 Le fournisseur est choisi avec `LLM_PROVIDER`. Les adaptateurs disponibles dans
 `src/llm_client.py` sont `openai`, `azure`, `anthropic` et `groq`.
 
-### OpenAI
-
-```dotenv
-LLM_PROVIDER=openai
-LLM_MODEL=<nom-du-modele>
-OPENAI_API_KEY=<cle>
-```
-
-### Azure OpenAI
-
-```dotenv
-LLM_PROVIDER=azure
-LLM_MODEL=<nom-du-deploiement>
-AZURE_OPENAI_API_KEY=<cle>
-AZURE_OPENAI_ENDPOINT=https://<ressource>.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-06-01
-```
-
-### Anthropic
-
-```dotenv
-LLM_PROVIDER=anthropic
-LLM_MODEL=<nom-du-modele>
-ANTHROPIC_API_KEY=<cle>
-```
-
 ### Groq
 
 ```dotenv
